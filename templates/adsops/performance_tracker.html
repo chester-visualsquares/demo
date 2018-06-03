@@ -1,0 +1,331 @@
+{% extends 'dashboard_base.html' %}
+
+{% load humanize %}
+{% load adsops_extras %}
+
+
+{% block head_title_base %}Convert Simply Performance Tracker{% endblock %}
+
+
+{% block extra_head_css %}
+<style>
+table td.cpa-high {
+  background-color: #f5696c;
+  color: #000;
+}
+table td.cpa-medium {
+  background-color: #ffc965;
+  color: #000;
+}
+table td.cpa-low {
+  background-color: #2ecc71;
+  color: #000;
+}
+table td.cpa-na {
+  background-color: #fff;
+}
+
+.compact{
+  margin-bottom: 0px;
+}
+
+.project-adstats {
+  table-layout: fixed;
+  width: 1830px;
+  border-spacing: 4px;
+  border-collapse: separate;
+  background-color: #fff;
+}
+
+.project-adstats th,
+.project-adstats td {
+  padding: 2px;
+  border-style: hidden;
+  border-color: #fff;
+}
+
+.project-adstats th {
+  background-color: #c3ccde;
+}
+
+.project-adstats td {
+  background-color: #f2f2f2;
+  text-align: center;
+  color: #024457;
+}
+
+.project-adstats span {
+  font-size: 12px
+}
+
+.project-adstats td.spending-40-off {
+  background-color: #F9A5A7;
+  color: #000;
+}
+.project-adstats td.spending-20-off {
+  background-color: #FFE0A6;
+  color: #000;
+}
+.project-adstats td.spending-on-track {
+  background-color: #82E0AA;
+  color: #000;
+}
+.project-adstats td.spending-na {
+  background-color: #f2f2f2;
+}
+
+.daily-adstats {
+  table-layout: fixed;
+  width: 1830px;
+  margin-bottom: 30px;
+}
+
+.daily-adstats th,
+.daily-adstats td {
+  padding: 2px;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.daily-adstats th {
+  background-color: #c3ccde;
+  border: 2px solid #fff;
+}
+
+.daily-adstats td {
+  text-align: center;
+}
+
+.daily-adstats th.main-column {
+  border: 0px;
+}
+
+.daily-adstats th.current-week,
+.daily-adstats td.current-week {
+  border-left: 5px solid #fff;
+  border-right: 5px solid #fff;
+}
+
+.daily-adstats th.current-week {
+  background-color: #818494;
+}
+</style>
+{% endblock extra_head_css %}
+
+{% block main_outer %}
+<h1>Convert Simply Performance Tracker</h1>
+
+{% for project, project_stats, project_adstats, project_dailyadstats_set, current_week_adstats, past_4_weeks_adstats_set in project_list %}
+<div>
+  <h2 class="compact">{{ project.name }} [{{ project_stats.status }}{% if project.network == 'FB' %}*{% endif %}]</h2>
+
+  <table class="project-adstats">
+    <thead>
+      <tr>
+        <th colspan="6">Spending</th>
+        <th colspan="6">Performance</th>
+      </tr>
+      <tr>
+        <th>Period</th>
+        <th>Remaining<br>Days</th>
+        <th>Campaign<br>Goal</th>
+        <th>Campaign<br>Spent</th>
+        <th>Remaining<br>Spending</th>
+        <th>Daily<br>Spending<br>Goal</th>
+        <th>CTR</th>
+        <th>Website<br>CTR</th>
+        <th>CPLC</th>
+        <th>Conv<br>Rate</th>
+        <th>Conversions</th>
+        <th>CPA</th>
+      </tr>
+      <tr>
+        <td>{{ project.adcampaignsettings.start_date|date:"d M, Y" }} -<br>{{ project.adcampaignsettings.end_date|date:"d M, Y" }}</td>
+        {% if project_stats.remain_days > 0 %}
+        <td>{{ project_stats.remain_days }}</td>
+        {% else %}
+        <td>Completed</td>
+        {% endif %}
+        <td>
+          $ {{ project.adcampaignsettings.budget|intcomma }}
+          {% if project.network == 'FB' %}<br>
+          ($ {{ project_stats.spend_cap|intcomma }}*)
+          {% endif %}
+        </td>
+        {% if project.network == 'FB' %}
+        <td>$ {{ project_stats.live_total_spent|floatformat:"2"|intcomma }}*</td>
+        <td>$ {{ project_stats.live_remain_spent|floatformat:"2"|intcomma }}</td>
+        {% else %}
+        <td>$ {{ project_adstats.dollar_spent|floatformat:"2"|intcomma }}</td>
+        <td>$ {{ project_stats.remain_dollar_spent|floatformat:"2"|intcomma }}</td>
+        {% endif %}
+        <td class="{{ project_stats.daily_spending_class }}">
+          {{ project_stats.daily_spending_goal|format_nullable:"$ {:,.2f}" }}
+        </td>
+        <td>{{ project_adstats.ctr|format_nullable:"{:.3%}" }}</td>
+        {% if project.network == 'FB' %}
+        <td>{{ project_stats.website_ctr|format_nullable:"{:.3}%" }}*</td>
+        {% else %}
+        <td>{{ project_adstats.website_ctr|format_nullable:"{:.3%}" }}</td>
+        {% endif %}
+        {% if project.network == 'FB' %}
+        <td>{{ project_stats.cplc|format_nullable:"$ {:,.2f}" }}*</td>
+        {% else %}
+        <td>{{ project_adstats.cplc|format_nullable:"$ {:,.2f}" }}</td>
+        {% endif %}
+        <td>{{ project_adstats.conversion_rate|format_nullable:"{:.3%}" }}</td>
+        <td>{{ project_adstats.conversions|intcomma }}</td>
+        <td class="{{ project_adstats.cpa_class }}">
+          {{ project_adstats.dollar_cpa|format_nullable:"$ {:,.2f}" }}
+          <br>
+          <span>
+            (Y: {{ project.adcampaignsettings.cpa_target_1 }}
+            R: {{ project.adcampaignsettings.cpa_target_2 }})
+          </span>
+        </td>
+      </tr>
+    </thead>
+  </table>
+
+  <table class="daily-adstats">
+    <thead>
+      <tr>
+        <th>Date</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        <th>{{ dailyadstats.date|date:"d M" }}<br>{{ dailyadstats.date|date:"D" }}</th>
+        {% endfor %}
+
+        <th class="current-week">
+          Current<br>
+          Week<br>
+          ({{ current_week_adstats.start_date|date:"d M" }})
+        </th>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <th>
+          Week of<br>
+          {{ weekly_adstats.start_date|date:"d M" }}
+        </th>
+        {% endfor %}
+         <th>Date</th>
+     </tr>
+      <tr>
+        <th class="main-column">Spent($)</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        <td class="{{ dailyadstats.cpa_class }}">{{ dailyadstats.dollar_spent|floatformat:"2"|intcomma }}</td>
+        {% endfor %}
+
+        <td class="current-week {{ current_week_adstats.cpa_class }}">{{ current_week_adstats.dollar_spent|floatformat:"2"|intcomma }}</td>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <td class="{{ weekly_adstats.cpa_class }}">{{ weekly_adstats.dollar_spent|floatformat:"2"|intcomma }}</td>
+        {% endfor %}
+        <th class="main-column">Spent($)</th>
+      </tr>
+      <tr>
+        <th class="main-column">Leads</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        {% if dailyadstats.conversions >= 0 %}
+        <td class="{{ dailyadstats.cpa_class }}">{{ dailyadstats.conversions|intcomma }}</td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        {% endfor %}
+
+        <td class="current-week {{ current_week_adstats.cpa_class }}">{{ current_week_adstats.conversions }}</td>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <td class="{{ weekly_adstats.cpa_class }}">{{ weekly_adstats.conversions|intcomma }}</td>
+        {% endfor %}
+        <th class="main-column">Leads</th>
+      </tr>
+      <tr>
+        <th class="main-column">CTR</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        {% if dailyadstats.spent == None %}
+        <td></td>
+        {% else %}
+        <td class="{{ dailyadstats.cpa_class }}">{{ dailyadstats.ctr|format_nullable:"{:.3%}" }}</td>
+        {% endif %}
+        {% endfor %}
+
+        <td class="current-week {{ current_week_adstats.cpa_class }}">{{ current_week_adstats.ctr|format_nullable:"{:.3%}" }}</td>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <td class="{{ weekly_adstats.cpa_class }}">{{ weekly_adstats.ctr|format_nullable:"{:.3%}" }}</td>
+        {% endfor %}
+        <th class="main-column">CTR</th>
+      </tr>
+      <tr>
+        <th class="main-column">CPLC($)</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        {% if dailyadstats.spent == None %}
+        <td></td>
+        {% else %}
+        <td class="{{ dailyadstats.cpa_class }}">{{ dailyadstats.cplc|format_nullable:"{:.2f}" }}</td>
+        {% endif %}
+        {% endfor %}
+
+        <td class="current-week {{ current_week_adstats.cpa_class }}">{{ current_week_adstats.cplc|format_nullable:"{:.2f}" }}</td>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <td class="{{ weekly_adstats.cpa_class }}">{{ weekly_adstats.cplc|format_nullable:"{:.2f}" }}</td>
+        {% endfor %}
+        <th class="main-column">CPLC($)</th>
+      </tr>
+      <tr>
+        <th class="main-column">Website CTR</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        {% if dailyadstats.spent == None %}
+        <td></td>
+        {% else %}
+        <td class="{{ dailyadstats.cpa_class }}">{{ dailyadstats.website_ctr|format_nullable:"{:.3%}" }}</td>
+        {% endif %}
+        {% endfor %}
+
+        <td class="current-week {{ current_week_adstats.cpa_class }}">{{ current_week_adstats.website_ctr|format_nullable:"{:.3%}" }}</td>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <td class="{{ weekly_adstats.cpa_class }}">{{ weekly_adstats.website_ctr|format_nullable:"{:.3%}" }}</td>
+        {% endfor %}
+        <th class="main-column">Website CTR</th>
+      </tr>
+      <tr>
+        <th class="main-column">ConvRate</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        {% if dailyadstats.spent == None %}
+        <td></td>
+        {% else %}
+        <td class="{{ dailyadstats.cpa_class }}">{{ dailyadstats.conversion_rate|format_nullable:"{:.3%}"}}</td>
+        {% endif %}
+        {% endfor %}
+
+        <td class="current-week {{ current_week_adstats.cpa_class }}">{{ current_week_adstats.conversion_rate|format_nullable:"{:.3%}" }}</td>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <td class="{{ weekly_adstats.cpa_class }}">{{ weekly_adstats.conversion_rate|format_nullable:"{:.3%}" }}</td>
+        {% endfor %}
+        <th class="main-column">ConvRate</th>
+      </tr>
+      <tr>
+        <th class="main-column">CPA</th>
+        {% for dailyadstats in project_dailyadstats_set %}
+        {% if dailyadstats.spent == None %}
+        <td></td>
+        {% else %}
+        <td class="{{ dailyadstats.cpa_class }}">{{ dailyadstats.dollar_cpa|format_nullable:"{:,.2f}" }}
+        {% endif %}
+        {% endfor %}
+
+        <td class="current-week {{ current_week_adstats.cpa_class }}">{{ current_week_adstats.dollar_cpa|format_nullable:"{:,.2f}" }}</td>
+
+        {% for weekly_adstats in past_4_weeks_adstats_set %}
+        <td class="{{ weekly_adstats.cpa_class }}">{{ weekly_adstats.dollar_cpa|format_nullable:"{:,.2f}" }}</td>
+        {% endfor %}
+        <th class="main-column">CPA</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+{% endfor %}
+{% endblock main_outer %}

@@ -1,0 +1,267 @@
+{% extends 'signup_mobile_templates/signup_mobile.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKELFAE17_FB_APP_ID }}{% endblock %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKELFAE17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKELFAE17_OG_URL }}{% endblock %}
+
+{% block app_css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}jquery-intl-tel-input/css/intlTelInput.css">
+
+<style>
+html {
+  overflow: auto;
+}
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+body #wrap {
+  margin: 0px auto;
+}
+.error {
+  color: #fa7ef0;
+}
+input[type=checkbox] {
+  -webkit-transform: scale(0.7, 0.7);
+}
+
+#canvas-wrap {
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  height: 750px;
+  width: 320px;
+  background-size: 320px 750px;
+  position: relative;
+
+  background-image: url('{{ STATIC_URL }}img/signup_mobile_tdc_hkelfae17/tdc_hkelfae17_signup_mobile_bg_top_{{ request.language }}_v2.jpg');
+}
+
+#canvas-wrap #contact .text-input input {
+  background-color: transparent;
+  border: 0px;
+  outline: 0px;
+
+  height: 20px;
+  line-height: 20px;
+  width: 184px;
+  font-size: 13px;
+}
+
+#canvas-wrap #last-name-container {
+  position: absolute;
+  left: 95px;
+  top: 129px;
+}
+#canvas-wrap #last-name-container input#id_last_name{
+  width: 66px;
+}
+#canvas-wrap #first-name-container {
+  position: absolute;
+  left: 213px;
+  top: 129px;
+}
+#canvas-wrap #first-name-container input#id_first_name{
+  width: 66px;
+}
+#canvas-wrap #region-container {
+  position: absolute;
+  left: 93px;
+  top: 168px;
+}
+#canvas-wrap #company-container {
+  position: absolute;
+  left: 95px;
+  top: 205px;
+}
+#canvas-wrap #email-container {
+  position: absolute;
+  left: 95px;
+  top: 247px;
+}
+#canvas-wrap #email-container input#id_phone {
+  position: relative;
+  height: 28px;
+}
+#canvas-wrap #mobile-phone-container {
+  position: absolute;
+  left: 95px;
+  top: 289px;
+}
+#canvas-wrap #mobile-phone-container input#id_phone {
+  position: relative;
+  height: 28px;
+}
+
+#form-detail-container {
+  width: 245px;
+
+  position: absolute;
+  top: 331px;
+  left: 37px;
+
+  font-size: 8px;
+  line-height: 10px;
+  color: #c5e0f5;
+}
+#form-detail-container > div {
+  margin-bottom: 4px;
+}
+#form-detail-container #format {
+  font-size: 9px;
+  line-height: 10px;
+}
+#form-detail-container #privacy-policy a,
+#form-detail-container #privacy-policy a:visited,
+#form-detail-container #contact-us a,
+#form-detail-container #contact-us a:visited {
+  color: #adadad;
+}
+#eu-disclaimer {
+  font-size: 9px;
+  line-height: 10px;
+  margin-top: 7px;
+}
+#contact-us {
+  margin-top: 62px;
+}
+#form-detail-container #unsubscribe {
+  font-size: 8px;
+  line-height: 10px;
+}
+#canvas-wrap #button-submit {
+  position: absolute;
+  left: 37px;
+  top: 538px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/mobile_button_register_{{ request.language }}.png');
+  background-size: 247px 36px;
+  background-color: transparent;
+
+  height: 36px;
+  width: 247px;
+  border: 0px;
+}
+
+#canvas-wrap #footer-link {
+  position: absolute;
+  bottom: 60px;
+  left: 19px;
+
+  font-size: 9px;
+  font-style: italic;
+}
+#canvas-wrap #footer-link, #footer-link:visited {
+  color: #ff7d00;
+}
+#wc-button {
+  height: 44px;
+  width: 320px;
+  display: block;
+
+  position: absolute;
+  top: 707px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_wc_mob.jpg');
+  background-size: 320px 44px;
+  background-color: transparent;
+}
+</style>
+{% endblock app_css %}
+
+{% block canvas_size %}1214{% endblock %}
+
+{% block async_fb_jssdk %}{% endblock async_fb_jssdk %}
+
+{% block app_canvas %}
+<div id="canvas-wrap" " class="signup-{{ request.language }}">
+  <a name="contact-form"></a>
+
+  <form id="contact" method="post" action="">
+    {% csrf_token %}
+    {{ form.country }}
+    {{ form.country_code }}
+
+    <div class="text-input" id="last-name-container">
+      {{ form.last_name }}
+    </div>
+    <div class="text-input" id="first-name-container">
+      {{ form.first_name }}
+    </div>
+    <div class="text-input" id="region-container">
+      {{ form.region }}
+      <span class="error">{{ form.region.errors.as_text }}</span>
+    </div>
+    <div class="text-input" id="company-container">
+      {{ form.company }}
+    </div>
+    <div class="text-input" id="email-container">
+      {{ form.email }}
+    </div>
+    <div class="text-input" id="mobile-phone-container">
+      {{ form.mobile_phone }}
+    </div>
+
+    <meta name="format-detection" content="telephone=no">
+    <div id="form-detail-container">
+      <div id="format">
+        香港以外地区买家：请先选择国家号码，然后输入地区号码（如适用）及电话号码，例：中国上海（国家号码：+86、地区号码：21），+86 2122199433<br>
+      </div>
+      <div id="reminder">
+        只供十八岁或以上的业内人士参观。主办单位将会复核登记人士的业内身份，并保留发入场证的决定权。
+      </div>
+      <div id="privacy-policy">
+        本人确认已阅读及同意香港贸易发展局的<a href="http://www.hktdc.com/mis/tu/tc/Terms-of-Use.html">使用条款</a>及<a href="http://www.hktdc.com/mis/vrr/tc/">访客规则及法规</a>。本人确定香港贸易发展局(“贸发局”)可将上述资料编入其全部或任何资料库内作为直接推广或商贸配对﹝因而可能成为可供本地及/或海外公众人士使用﹞，以及用于贸发局在<a href="http://www.hktdc.com/mis/pps/tc/Privacy-Policy-Statement.html" target="_blank">私隐政策声明</a>中所述之其他用途。本人确认已获得此表格上所述的每一位人士同意及授权，将其个人资料提供予贸发局作此表格提及的用途。本人亦同意在参观展览会时遵守香港贸易发展局所订之<a href="http://www.hktdc.com/mis/vrr/tc/">访客规则及法规</a>。<br>
+      </div>
+      <div id="eu-disclaimer">
+        {{ form.eu_disclaimer }}
+        若阁下来自欧洲联盟(“欧盟”)或欧洲经济区的成员国 ， 并同意我们将阁下的资料用作进行直接推广的用途， 请选择此项。<br>
+        (此选项是按欧盟有关保护个人资料法律的要求而设，对于非欧盟/欧洲经济区的客户，请略过此项。)<br>
+      </div>
+      <div id="contact-us">
+        (若阁下不欲收取香港贸易发展局的任何宣传资料，请联络本局客户服务热线 (852) 1830668或 <a href="mailto:hktdc@hktdc.org" target="_blank">hktdc@hktdc.org</a>。)
+      </div>
+    </div>
+
+    <div id="submit-container">
+      <button id="button-submit" type="submit"></button>
+    </div>
+  </form>
+  
+  <a id="wc-button" href="https://www.wavecommerce.hk/" target="_blank"></a>
+  <a id="footer-link" href="http://www.hktdc.com/sc/" target="_blank">www.hktdc.com</a>
+</div>
+{% endblock app_canvas %}
+
+{% block extra_body %}
+<script>{% include 'signup_mobile_tdc_hkelfae17/signup.js' %}</script>
+
+<script src="{{ STATIC_URL }}jquery-intl-tel-input/js/intlTelInput.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#id_mobile_phone").intlTelInput({
+    autoPlaceholder: false,
+    initialCountry: "hk",
+    nationalMode: true,
+    preferredCountries: ['us', 'ca', 'ru', 'fr', 'it', 'gb', 'de', 'br', 'my',
+                         'au', 'id', 'ph', 'sg', 'th', 'jp', 'kr', 'cn', 'tr',
+                         'in', 'hk', 'tw'],
+    responsiveDropdown: true,
+    separateDialCode: true,
+    utilsScript: "{{ STATIC_URL }}jquery-intl-tel-input/js/utils.js"
+  });
+
+  $('#contact').submit(function() {
+    var countryData = $('#id_mobile_phone').intlTelInput("getSelectedCountryData");
+    $('#id_country').val(countryData.iso2);
+    $('#id_country_code').val(countryData.dialCode);
+  });
+});
+</script>
+{% endblock extra_body %}

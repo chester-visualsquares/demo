@@ -1,0 +1,380 @@
+{% extends 'signup_mobile_templates/signup.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKELFAE17_FB_APP_ID }}{% endblock %}
+
+{% block fb_retargeting %}
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '341673639320078');
+  fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=341673639320078&ev=PageView&noscript=1"
+/></noscript>
+{% endblock fb_retargeting %}
+
+{% block twitter_tracking %}{% endblock twitter_tracking %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKELFAE17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKELFAE17_OG_URL }}{% endblock %}
+
+{% block app_css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}jquery-intl-tel-input/css/intlTelInput.css">
+
+<style>
+body #wrap {
+  margin: 0px;
+}
+.error {
+  color: #fa7ef0;
+}
+
+{% if network == 'website' %}
+html {
+    overflow: auto;
+}
+
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+body #wrap{
+  margin: 15px auto;
+
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  width: 810px;
+  position: relative;
+}
+{% endif %}
+
+#canvas-wrap {
+  height: 1044px;
+  width: 810px;
+
+  position: relative;
+
+  background-image: url('//d2dj4eyr0s9m9l.cloudfront.net/tdc_hkelfae17_signup_bg_top_{{ request.language }}_v2.jpg');
+  background-repeat: no-repeat;
+}
+
+#language-switch {
+  position: absolute;
+  right: 26px;
+  top: 25px;
+
+  font-size: 14px;
+}
+.signup-chi #language-switch {
+  right: 16px;
+}
+#language-switch, #language-switch:visited {
+  color: #9f9f9f;
+}
+
+#contact input[type=text], input[type=email] {
+  height: 35px;
+  width: 358px;
+  border: 0px;
+  outline: 0px;
+
+  background-color: transparent;
+  font-size: 22px;
+  line-height: 35px;
+}
+.signup-eng #contact input[type=text], .signup-eng #contact input[type=email] {
+  width: 350px;
+}
+#last-name-container {
+  position: absolute;
+  left: 256px;
+  top: 255px;
+}
+.signup-eng #last-name-container {
+  left: 486px;
+  top: 236px;
+}
+#canvas-wrap #last-name-container input#id_last_name{
+  width: 133px;
+}
+#first-name-container {
+  position: absolute;
+  left: 482px;
+  top: 255px;
+}
+.signup-eng #first-name-container {
+  left: 261px;
+  top: 236px;
+}
+#canvas-wrap #first-name-container input#id_first_name{
+  width: 134px;
+}
+#company-container {
+  position: absolute;
+  left: 257px;
+  top: 307px;
+}
+.signup-eng #company-container {
+  left: 263px;
+  top: 286px;
+}
+#email-container {
+  position: absolute;
+  left: 256px;
+  top: 358px;
+}
+.signup-eng #email-container {
+  left: 263px;
+  top: 337px;
+}
+#mobile-phone-container {
+  position: absolute;
+  left: 257px;
+  top: 410px;
+}
+.signup-eng #mobile-phone-container {
+  left: 264px;
+  top: 390px;
+}
+#form-detail-container {
+  width: 480px;
+
+  position: absolute;
+  top: 474px;
+  left: 140px;
+
+  font-size: 11px;
+  line-height: 14px;
+  color: #c5e0f5;
+}
+.signup-eng #form-detail-container {
+    top: 449px;
+
+  font-size: 10px;
+  line-height: 13px;
+}
+#form-detail-container > div {
+  margin-bottom: 13px;
+}
+.signup-eng #form-detail-container > div {
+  margin-bottom: 8px;
+}
+#form-detail-container #format {
+  font-size: 16px;
+  line-height: 20px;
+}
+.signup-eng #form-detail-container #format {
+  font-size: 13px;
+  line-height: 17px;
+}
+#form-detail-container #privacy-policy a,
+#form-detail-container #privacy-policy a:visited,
+#form-detail-container #contact-us a,
+#form-detail-container #contact-us a:visited {
+  color: #adadad;
+}
+#eu-disclaimer {
+  font-size: 13px;
+  line-height: 17px;
+  margin-top: 12px;
+}
+.signup-eng #eu-disclaimer{
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 12px;
+}
+#form-detail-container #unsubscribe {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.signup-eng #form-detail-container #unsubscribe {
+  font-size: 11px;
+}
+#submit-container {
+  position: absolute;
+  left: 138px;
+  top: 727px;
+}
+.signup-eng #submit-container {
+  top: 749px;
+}
+#submit-container #contact-us {
+  position: absolute;
+  font-size: 11px;
+  line-height: 14px;
+  color: #c5e0f5;
+  width: 480px;
+  left: 6px;
+  margin-top: 9px;
+}
+#submit-container #contact-us a {
+  color: #adadad;
+}
+#submit-container button {
+  height: 54px;
+  width: 484px;
+  border: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_submit_{{ request.language }}.png');
+  background-color: transparent;
+}
+#submit-container button:hover {
+  background-position: 0px -54px;
+}
+
+#footer-link {
+  position: absolute;
+  bottom: 89px;
+  left: 49px;
+
+  font-size: 15px;
+  font-style: italic;
+}
+#footer-link, #footer-link:visited {
+  color: #ff7d00;
+}
+#wc-button {
+  height: 62px;
+  width: 810px;
+  display: block;
+
+  position: absolute;
+  top: 983px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_wc_bg.jpg');
+  background-color: transparent;
+}
+</style>
+{% endblock app_css %}
+
+{% block canvas_size %}1044{% endblock %}
+{% block app_canvas %}
+<div id="canvas-wrap" class="signup-{{ request.language }}">
+  {% if request.language == 'chi' %}
+  <a id="language-switch" href="{% language_url 'eng' %}">English</a>
+  {% else %}
+  <a id="language-switch" href="{% language_url 'chi' %}">中文</a>
+  {% endif %}
+
+  <form id="contact" method="post" action="">
+    {% csrf_token %}
+    {{ form.country }}
+    {{ form.country_code }}
+
+    {% if request.language == 'chi' %}
+    <div id="last-name-container">
+      {{ form.last_name }}
+    </div>
+    {% endif %}
+    <div id="first-name-container">
+      {{ form.first_name }}
+    </div>
+    {% if request.language == 'eng' %}
+    <div id="last-name-container">
+      {{ form.last_name }}
+    </div>
+    {% endif %}
+    <div id="company-container">
+      {{ form.company }}
+    </div>
+    <div id="email-container">
+      {{ form.email }}
+    </div>
+    <div id="mobile-phone-container">
+      {{ form.mobile_phone }}
+    </div>
+
+    {% if request.language == 'chi' %}
+    <div id="form-detail-container">
+      <div id="format">
+        請選擇國家號碼，然後輸入電話號碼（如適用，請包括地區號碼），例：+1 5417543010
+      </div>
+      <div id="reminder">
+        只供十八歲或以上的業內人士參觀。主辦機構將會復核登記人士的業內身份，並保留發入場證的決定權。
+      </div>
+      <div id="privacy-policy">
+        本人確認已閱讀及同意香港貿易發展局的<a href="http://www.hktdc.com/mis/tu/tc/Terms-of-Use.html">使用條款</a>及<a href="http://www.hktdc.com/mis/vrr/tc/">訪客規則及法規</a>。本人確定香港貿易發展局(“貿發局”)可將上述資料編入其全部或任何資料庫內作為直接推廣或商貿配對﹝因而可能成為可供本地及/或海外公眾人士使用﹞，以及用於貿發局在<a href="http://www.hktdc.com/mis/pps/tc/Privacy-Policy-Statement.html" target="_blank">私隱政策聲明</a>中所述之其他用途。本人確認已獲得此表格上所述的每一位人士同意及授權，將其個人資料提供予貿發局作此表格提及的用途。本人亦同意在參觀展覽會時遵守香港貿易發展局所訂之<a href="http://www.hktdc.com/mis/vrr/tc/">訪客規則及法規</a>。<br>
+      </div>
+      <div id="eu-disclaimer">
+        {{ form.eu_disclaimer }} 若閣下來自歐洲聯盟(“歐盟”)或歐洲經濟區的成員國， 並同意我們將閣下的資料用作進行直接推廣的用途， 請選擇此項。<br>
+        *此選項是按歐盟有關保護個人資料法律的要求而設，對於非歐盟/歐洲經濟區的客戶，請略過此項。<br>
+      </div>
+    </div>
+    {% else %}
+    <div id="form-detail-container">
+      <div id="format">
+        Please select the country code and enter the phone number (if applicable, please include the area code) e.g.: +1 5417543010
+      </div>
+      <div id="reminder">
+        For trade visitors aged 18 or above only. The Organisers shall verify the trade identity of registrants and reserve the right to refuse admission of any registrants who are deemed inappropriate.  
+      </div>
+      <div id="privacy-policy">
+        I confirm that I have read and agree with HKTDC's <a href="http://www.hktdc.com/mis/tu/en/Terms-of-Use.html">Terms of Use</a> and <a href="http://www.hktdc.com/mis/vrr/en/Visitor-s-Rules-and-Regulations.html">Visitors’ Rules and Regulations</a>. I acknowledge that the above information may be used by the  Hong Kong Trade Development Council (HKTDC) for incorporation in all or any of its database for direct marketing or business matching purpose (and may therefore become available to the public within and/or outside of Hong Kong for use by them), and for any other purposes as stated in the <a href="http://www.hktdc.com/mis/pps/en/Privacy-Policy-Statement.html">Privacy Policy Statement</a>.  I confirm that I have the consent and the authority of each individual named in this form to release their personal data for the purposes stated herein and am admitted to the Fair on condition that I abide by the <a href="http://www.hktdc.com/mis/vrr/en/Visitor-s-Rules-and-Regulations.html">Visitors’ Rules &amp; Regulations</a> set by the HKTDC. <br>
+      </div>
+      <div id="eu-disclaimer">
+        {{ form.eu_disclaimer }}
+        If you are from a member state of the European Union (“EU”) / European Economic Area (“EEA”), Please check this box if you accept our use of your provided data for direct marketing purposes.<br>
+        *For non-EU/EEA customers, please skip this box which is solely for EU/EEA customers as required by the relevant data protection law in the EU.<br>
+      </div>
+    </div>
+    {% endif %}
+
+
+    <div id="submit-container">
+      <button type="submit"></button>
+      <div id="contact-us">
+        {% if request.language == 'chi'%}
+        (若閣下不欲收取香港貿易發展局的任何宣傳資料，請聯絡本局客戶服務熱線 (852) 1830668或 <a href="mailto:hktdc@hktdc.org" target="_blank">hktdc@hktdc.org</a>。)
+        {% else %}
+        (If you do not wish to receive any promotional materials from the HKTDC, please contact our Customer Service Hotline at (852) 1830668 or <a href="mailto:hktdc@hktdc.org" target="_blank">hktdc@hktdc.org</a>.)
+        {% endif%}
+      </div>
+    </div>
+  </form>
+
+  <a id="wc-button" href="https://www.wavecommerce.hk/" target="_blank"></a>
+  {% if request.language == 'chi' %}
+  <a id="footer-link" href="http://www.hktdc.com/tc/" target="_blank">www.hktdc.com</a>
+  {% else %}
+  <a id="footer-link" href="http://www.hktdc.com/en-buyer" target="_blank">www.hktdc.com</a>
+  {% endif %}
+</div>
+{% endblock app_canvas %}
+
+{% block extra_body %}
+<script>{% include 'signup_mobile_tdc_hkelfae17/signup.js' %}</script>
+
+<script src="{{ STATIC_URL }}jquery-intl-tel-input/js/intlTelInput.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#id_mobile_phone").intlTelInput({
+    autoPlaceholder: false,
+    initialCountry: "hk",
+    nationalMode: true,
+    preferredCountries: ['us', 'ca', 'ru', 'fr', 'it', 'gb', 'de', 'br', 'my',
+                         'au', 'id', 'ph', 'sg', 'th', 'jp', 'kr', 'cn', 'tr',
+                         'in', 'hk', 'tw'],
+    responsiveDropdown: true,
+    separateDialCode: true,
+    utilsScript: "{{ STATIC_URL }}jquery-intl-tel-input/js/utils.js"
+  });
+
+  $('#contact').submit(function() {
+    var countryData = $('#id_mobile_phone').intlTelInput("getSelectedCountryData");
+    $('#id_country').val(countryData.iso2);
+    $('#id_country_code').val(countryData.dialCode);
+  });
+});
+</script>
+{% endblock extra_body %}

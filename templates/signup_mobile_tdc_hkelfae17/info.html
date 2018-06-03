@@ -1,0 +1,163 @@
+{% extends 'signup_mobile_templates/app_base.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKELFAE17_FB_APP_ID }}{% endblock %}
+
+{% block fb_retargeting %}
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '341673639320078');
+  fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=341673639320078&ev=PageView&noscript=1"
+/></noscript>
+{% endblock fb_retargeting %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKELFAE17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKELFAE17_OG_URL }}{% endblock %}
+
+{% block extra_head_css %}
+<style>
+body #wrap {
+  margin: 0px;
+}
+
+{% if network == 'website' %}
+html {
+    overflow: auto;
+}
+
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+body #wrap{
+  margin: 15px auto;
+
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  width: 810px;
+  position: relative;
+}
+{% endif %}
+
+#canvas-wrap {
+  height: 1120px;
+  width: 810px;
+
+  position: relative;
+
+  background-image: url('//d2dj4eyr0s9m9l.cloudfront.net/tdc_hkelfae17_info_bg_top_{{ request.language }}_v2.jpg');
+  background-repeat: no-repeat;
+}
+#language-switch {
+  position: absolute;
+  {% if request.language == 'eng' %}
+  right: 24px;
+  {% else %}
+  right: 14px;
+  {% endif %}
+  top: 25px;
+
+  font-size: 15px;
+}
+#language-switch, #language-switch:visited {
+  color: #9f9f9f;
+}
+#register-button {
+  height: 62px;
+  width: 364px;
+  display: block;
+
+  position: absolute;
+  top: 586px;
+  left: 54px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_info_{{ request.language }}.png');
+  background-color: transparent;
+}
+#register-button:hover {
+  background-position: 0px -62px;
+}
+#footer-link {
+  position: absolute;
+  bottom: 88px;
+  left: 49px;
+
+  font-size: 15px;
+  font-style: italic;
+}
+#booth-link {
+  position: absolute;
+  bottom: 207px;
+  left: 268px;
+  font-size: 11px;
+}
+.signup-eng #booth-link {
+    position: absolute;
+  bottom: 208px;
+  left: 372px;
+  font-size: 10px;
+}
+#booth-link a:hover {
+  color: #ff7d00 !important;
+}
+#booth-application {
+  color: #000000;
+  display:block;
+  margin-bottom: 5px;
+}
+#footer-link, #footer-link:visited {
+  color: #ff7d00;
+}
+#wc-button {
+  height: 62px;
+  width: 810px;
+  display: block;
+
+  position: absolute;
+  top: 1064px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_wc_bg.jpg');
+  background-color: transparent;
+}
+</style>
+{% endblock extra_head_css %}
+
+{% block canvas_size %}1120{% endblock %}
+{% block app_canvas %}
+<div id="canvas-wrap" class="signup-{{ request.language }}">
+  {% if request.language == 'chi' %}
+  <a id="language-switch" href="{% language_url 'eng' %}">English</a>
+  {% else %}
+  <a id="language-switch" href="{% language_url 'chi' %}">中文</a>
+  {% endif %}
+
+  <a id="register-button" href="{{ next_url }}"></a>
+  <a id="wc-button" href="https://www.wavecommerce.hk/" target="_blank"></a>
+  {% if request.language == 'chi' %}
+  <div id="booth-link">
+    <a id="booth-application" href="https://goo.gl/hfh7jE" target="_blank">{{  settings.SNM_TDC_HKELFAE17_FAIR_NAME_CHI_LF  }} 2017</a>
+    <a id="booth-application" href="https://goo.gl/DWemXK" target="_blank">{{  settings.SNM_TDC_HKELFAE17_FAIR_NAME_CHI_OL  }} 2017</a>
+  </div>
+  <a id="footer-link" href="http://www.hktdc.com/tc/" target="_blank">www.hktdc.com</a>
+  {% else %}
+  <div id="booth-link">
+    <a id="booth-application" href="https://goo.gl/hfh7jE" target="_blank">{{  settings.SNM_TDC_HKELFAE17_FAIR_NAME_ENG_LF  }} 2017</a>
+    <a id="booth-application" href="https://goo.gl/DWemXK" target="_blank">{{  settings.SNM_TDC_HKELFAE17_FAIR_NAME_ENG_OL  }} 2017</a>
+  </div>
+  <a id="footer-link" href="http://www.hktdc.com/en-buyer" target="_blank">www.hktdc.com</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock app_canvas %}

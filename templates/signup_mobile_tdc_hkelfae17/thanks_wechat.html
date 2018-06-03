@@ -1,0 +1,135 @@
+{% extends 'signup_mobile_templates/thanks_mobile.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKELFAE17_FB_APP_ID }}{% endblock %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKELFAE17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKELFAE17_OG_URL }}{% endblock %}
+
+{% block app_css %}
+<style>
+html {
+  overflow: auto;
+}
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+#thanks-page {
+  margin: 0px auto;
+
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  height: 536px;
+  width: 320px;
+  background-size: 320px 536px;
+  position: relative;
+
+  background-image: url('{{ STATIC_URL }}img/signup_mobile_tdc_hkelfae17/tdc_hkelfae17_thanks_mobile_bg_{{ request.language }}_v2.jpg');
+}
+#email-reminder-container {
+  width: 294px;
+
+  position: absolute;
+
+  font-size: 16px;
+  color: #565658;
+  text-align: center;
+  top: 152px;
+  left: 10px;
+}
+.email-reminder-note{
+  color: #565658;
+  font-size: 9px;
+}
+.email-reminder-link, .email-reminder-link:visited #email-reminder-container{
+  color: #015ea4;
+}
+
+#register-more-button {
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/mobile_button_register_more_{{ request.language }}.png');
+  background-size: 251px 32px;
+  background-color: transparent;
+
+  height: 32px;
+  width: 251px;
+  border: 0px;
+
+  position: absolute;
+  left: 36px;
+  top: 288px;
+}
+
+#footer-title {
+  position: absolute;
+  top: 447px;
+  left: 19px;
+}
+#footer-link-1 {
+  position: absolute;
+  top: 454px;
+  left: 19px;
+}
+#footer-link-2 {
+  position: absolute;
+  top: 461px;
+  left: 19px;
+}
+#footer-link-3 {
+  position: absolute;
+  top: 468px;
+  left: 19px;
+}
+#footer-link-4 {
+  position: absolute;
+  top: 475px;
+  left: 19px;
+}
+#footer-link-5 {
+  position: absolute;
+  bottom: 62px;
+  left: 19px;
+}
+.footer-text, .footer-text:visited {
+  color: #ff7d00;
+  font-size: 8px;
+  font-style: italic;
+}
+#wc-button {
+  height: 44px;
+  width: 320px;
+  display: block;
+
+  position: absolute;
+  top: 493px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_wc_mob.jpg');
+  background-size: 320px 44px;
+  background-color: transparent;
+}
+</style>
+{% endblock app_css %}
+
+{% block async_fb_jssdk %}{% endblock async_fb_jssdk %}
+
+{% block like_button %}{% endblock like_button %}
+{% block social_buttons %}{% endblock social_buttons %}
+
+{% block canvas_extra %}
+<div id="email-reminder-container">
+  {{ cid }}
+</div>
+
+<a href="{% url 'snm_tdc_hkelfae17_signup_wechat' %}"><button id="register-more-button"></button></a>
+
+<a id="wc-button" href="https://www.wavecommerce.hk/" target="_blank"></a>
+<a id="footer-link-5" class="footer-text" href="http://www.hktdc.com/sc/" target="_blank">www.hktdc.com</a>
+{% endblock canvas_extra %}
+
+{# The following blocks cannot contain new line characters #}
+{% block fb_page_url %}{{ settings.SNM_TDC_HKELFAE17_FB_PAGE_URL }}{% endblock %}

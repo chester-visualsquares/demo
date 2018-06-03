@@ -1,0 +1,82 @@
+{% extends 'inspinia_base.html' %}
+
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block head_title_base %}Convert Simply BOT Authentication{% endblock %}
+{% block extra_head_css %}
+<style>
+#next-button {
+  padding-top: 32px;
+}
+</style>
+{% endblock extra_head_css %}
+
+
+{% block sidebar_header %}
+  <div class="dropdown profile-element">
+    <span><img alt="image" class="img-circle" height="48px" width="48px" src="{{ STATIC_URL }}img/fb_chatbot_event_tdc/hktdc_logo.png" /></span>
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+      <span class="clear">
+        <span class="block m-t-xs">
+          <strong class="font-bold">HKTDC</strong>
+        </span>
+        <span class="text-muted text-xs block">Client <b class="caret"></b></span>
+      </span>
+    </a>
+    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+      <li class="divider"></li>
+      <li><a href="{% url 'fb_chatbot_event_tdc_auth_logout' %}">Logout</a></li>
+    </ul>
+  </div>
+  <div class="logo-element">
+    <span><img alt="image" class="img-circle" height="48px" width="48px" src="{{ STATIC_URL }}img/fb_chatbot_event_tdc/hktdc_logo.png" /></span>
+  </div>
+{% endblock sidebar_header %}
+
+
+{% block logout_url_1 %}{% url 'fb_chatbot_event_tdc_auth_logout' %}{% endblock logout_url_1 %}
+{% block logout_url_2 %}{% url 'fb_chatbot_event_tdc_auth_logout' %}{% endblock logout_url_2 %}
+{% block welcome_message %}Powered by Convert Simply.{% endblock welcome_message %}
+
+{% block sidebar_items %}
+<li class="active">
+  <a href="{% url 'fb_chatbot_event_tdc_fb_auth' %}">
+    <i class="fa fa-envelope"></i>
+    <span class="nav-label">BOT Authentication</span>
+  </a>
+</li>
+{% endblock sidebar_items %}
+
+
+{% block page_title %}Convert Simply BOT{% endblock page_title %}
+
+
+{% block page_items %}
+<li>Authentication</a></li>
+<li><a href="{% url 'fb_chatbot_event_tdc_fb_auth' %}">Log in Facebook</a></li>
+<li>Choose Facebook Page</li>
+<li class="active"><strong>Status</strong></li>
+{% endblock page_items %}
+
+
+{% block body_block %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>BOT Subscription Status</h5>
+      </div>
+      <div class="ibox-content">
+        <p>Successful Subscription: {{ page_name }}</p>
+        <div class="m-t text-righ">
+          <a href="{% url 'fb_chatbot_event_tdc_fb_auth' %}" class="btn btn-outline btn-primary" id="back-button"><i class="fa fa-long-arrow-left"></i> Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body_block %}
+
+
+{% block extra_body_js %}{% endblock extra_body_js %}

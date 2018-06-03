@@ -1,0 +1,301 @@
+{% extends 'signup_mobile_templates/thanks_mobile.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKJF17_FB_APP_ID }}{% endblock %}
+
+{% block fb_tracking %}
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '341673639320078', {em: '{{ cid }},'});
+  fbq('track', "PageView");
+  fbq('track', 'Lead');</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=341673639320078&ev=PageView&noscript=1"
+/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=341673639320078&ev=Lead&noscript=1"
+/></noscript>
+{% endblock fb_tracking %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKJF17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKJF17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKJF17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKJF17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKJF17_OG_URL }}{% endblock %}
+
+{% block app_css %}
+<style>
+html {
+  overflow: auto;
+}
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+#thanks-page {
+  margin: 0px auto;
+
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  height: 490px;
+  width: 320px;
+  background-size: 320px 490px;
+  position: relative;
+
+  {% if mgr %}
+  background-image: url('//d2dj4eyr0s9m9l.cloudfront.net/tdc_hkjf17_thanks_mobile_bg_{{ request.language }}_fbm_v2.jpg');
+  height: 585px;
+  background-size: 320px 585px;
+  {% else %}
+  background-image: url('//d2dj4eyr0s9m9l.cloudfront.net/tdc_hkjf17_thanks_mobile_bg_{{ request.language }}.jpg');
+  {% endif %}
+}
+#email-reminder-container {
+  width: 294px;
+
+  position: absolute;
+
+  font-size: 16px;
+  color: #565658;
+  text-align: center;
+
+  {% if mgr %}
+  top: 128px;
+  {% else %}
+
+  {% if request.language == 'chi' %}
+  top: 135px;
+  {% else %}
+  top: 131px;
+  {% endif %}
+
+  {% endif %}
+
+  left: 13px;
+}
+
+#register-more-button {
+  background-color: transparent;
+
+  border: 0px;
+
+  position: absolute;
+
+  {% if mgr %}
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/mobile_button_register_more_small_{{ request.language }}.png');
+  background-size: 164px 44px;
+  height: 22px;
+  width: 164px;
+
+  top: 372px;
+  left: 78px;
+  {% else %}
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/mobile_button_register_more_small_{{ request.language }}.png');
+  background-size: 251px 64px;
+  height: 32px;
+  width: 251px;
+
+  top: 292px;
+  left: 36px;
+  {% endif %}
+}
+
+#register-more-button:hover {
+  {% if mgr %}
+  background-position: 0px -22px;
+  {% else %}
+  background-position: 0px -32px;
+  {% endif %}
+}
+
+.fb-send-to-messenger {
+  position: absolute;
+  top: 275px;
+  left: 72px;
+}
+
+#whatsapp-button {
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_whatsapp_share.svg');
+  background-size: 800px 600px;
+  background-color: transparent;
+
+  height: 25px;
+  width: 100px;
+  border: 0px;
+
+  position: absolute;
+  left: 157px;
+  {% if mgr %}
+  top: 456px;
+  {% else %}
+  top: 244px;
+  {% endif %}
+}
+#share-wall {
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_fb_share.png');
+
+  height: 20px;
+  width: 56px;
+  background-size: 56px 20px;
+
+  background-color: transparent;
+  border: 0px;
+  position: absolute;
+  left: 67px;
+  {% if mgr %}
+  top: 456px;
+  {% else %}
+  top: 244px;
+  {% endif %}
+}
+
+#like-button {
+  left: 27px;
+  top: 387px;
+}
+#linkedin-follow-button {
+  position: absolute;
+  left: 218px;
+  top: 387px;
+}
+#twitter-follow-button {
+  position: absolute;
+  left: 97px;
+  top: 387px;
+}
+#footer-title {
+  position: absolute;
+  top: 447px;
+  left: 19px;
+}
+#footer-link-1 {
+  position: absolute;
+  top: 454px;
+  left: 19px;
+}
+#footer-link-2 {
+  position: absolute;
+  top: 461px;
+  left: 19px;
+}
+#footer-link-3 {
+  position: absolute;
+  top: 468px;
+  left: 19px;
+}
+#footer-link-4 {
+  position: absolute;
+  top: 475px;
+  left: 19px;
+}
+#footer-link-5 {
+  position: absolute;
+  bottom: 59px;
+  left: 30px;
+}
+.footer-text, .footer-text:visited {
+  color: #ff7d00;
+  font-size: 8px;
+  font-style: italic;
+}
+#cs-button {
+  height: 44px;
+  width: 320px;
+  display: block;
+
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_cs_mob.jpg');
+  background-size: 320px 44px;
+  background-color: transparent;
+}
+</style>
+<script>
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'Messenger'));
+</script>
+{% endblock app_css %}
+
+{% block extra_head_js_uncompressed %}
+{{ block.super }}
+
+<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+{% endblock extra_head_js_uncompressed %}
+
+{% block like_button %}
+{% if not mgr %}
+<div id="like-button">
+  <div class="fb-like" data-href="{{ settings.SNM_TDC_HKJF17_FB_PAGE_URL }}" data-layout="button" data-action="like" data-show-faces="false" data-share="false">
+  </div>
+</div>
+{% endif %}
+{% endblock like_button %}
+
+{% block social_buttons %}
+{% if request.language == 'chi' %}
+<a href="whatsapp://send?text=立即登記，優先預留「{{ settings.SNM_TDC_HKJF17_FAIR_NAME_CHI }} 」免費入場證 ！{{ settings.SNM_TDC_HKJF17_WHATSAPP_LINK_CHI }}">
+{% else %}
+<a href="whatsapp://send?text=Register Now to reserve your FREE admission badge for the {{ settings.SNM_TDC_HKJF17_FAIR_NAME_ENG }}! {{ settings.SNM_TDC_HKJF17_WHATSAPP_LINK_ENG }}">
+{% endif %}
+<button id="whatsapp-button" data-event-category="Share" data-event-action="share-whatsapp"></button></a>
+
+{% if mgr %}
+<div class="fb-send-to-messenger"
+  messenger_app_id="{{ settings.SNM_TDC_HKJF17_MESSENGER_APP_ID }}"
+  page_id="{{ settings.SNM_TDC_HKJF17_FB_PAGE_ID }}"
+  data-ref="{{ pass_through_param }}"
+  color="blue"
+  size="xlarge">
+</div>
+{% else %}
+<div id="linkedin-follow-button">
+  <script type="IN/FollowCompany" data-id="15244"></script>
+</div>
+
+<div id="twitter-follow-button">
+  <a href="https://twitter.com/hktdc" class="twitter-follow-button" data-show-count="false">Follow @hktdc</a>
+</div>
+{% endif %}
+
+{% if network == 'twitter' %}
+<a href="{% url 'snm_tdc_hkjf17_signup_website' %}">
+{% else %}
+<a href="{% url 'snm_tdc_hkjf17_signup_mobile' %}">
+{% endif %}
+  <button id="register-more-button" data-event-category="Register"  data-event-action="register-next-buyer"></button>
+</a>
+
+<button id="share-wall" class="share-button" data-event-category="Share"  data-event-action="share-fb-wall"></button>
+
+{% endblock social_buttons %}
+
+{% block canvas_extra %}
+<div id="email-reminder-container">
+  {{ cid }}
+</div>
+
+<a id="cs-button" href="http://www.convertsimply.com" target="_blank"></a>
+{% if request.language == 'chi' %}
+<a id="footer-link-5" class="footer-text" href="http://www.hktdc.com/tc/" target="_blank">www.hktdc.com</a>
+{% else %}
+<a id="footer-link-5" class="footer-text" href="http://www.hktdc.com/en-buyer/" target="_blank">www.hktdc.com</a>
+{% endif %}
+{% endblock canvas_extra %}
+
+{% block feed_link %}https://a.wya.me/hktdc/{{ settings.SNM_TDC_HKJF17_CLIENT_APP_NAME }}/info-website?fbcsid={{ settings.SNM_TDC_HKJF17_FBCSID_PREFIX }}9999&lang={{ request.language }}{% endblock %}

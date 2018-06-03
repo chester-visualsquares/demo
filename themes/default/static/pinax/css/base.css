@@ -1,0 +1,32 @@
+/* GENERAL */
+html, body {
+    height: 100%;
+}
+dt {
+    font-weight: bold;
+}
+.ie7 h1 {
+    margin-bottom: 0.67em;
+    margin-top: 0.67em;
+}
+.ie7 h2 {
+    margin-bottom: 0.83em;
+    margin-top: 0.83em;
+}
+
+.warning {
+    color: red;
+    font-weight: bold;
+}
+
+.ra {
+  text-align: right;
+}
+
+.inline {
+  display: inline;
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+}

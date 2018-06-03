@@ -1,0 +1,170 @@
+{% load compress %}
+{% load i18n %}
+
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]>
+<html class="no-js ie6 oldie" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+<!--[if IE 7 ]>
+<html class="no-js ie7 oldie" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8 oldie" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+{# TODO(ycchan): Consider adding an manifest.appcache: h5bp.com/d/Offline #}
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="{{ LANGUAGE_CODE }}">
+<!--<![endif]-->
+
+{# TODO(ycchan): Revisit http://html5boilerplate.com/docs/#Make-it-Better #}
+{# from time to time to implement tips. #}
+
+<head>
+  <meta charset="utf-8">
+
+  {# TODO(ycchan): Use the .htaccess and remove these lines to avoid edge #}
+  {# case issues. More info: h5bp.com/b/378 #}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>
+    {% block head_title_base %}
+    {% if SITE_NAME %}{{ SITE_NAME }}:{% endif %}
+    {% block head_title %}{% endblock head_title %}
+    {% endblock head_title_base %}
+  </title>
+
+  {# TODO(ycchan): Add the description. #}
+  <meta name="description" content="">
+  <meta name="author" content="{% block meta_author %}{{ SITE_NAME }}{% endblock %}">
+
+  <meta name="application-name" content="{{ SITE_NAME }}">
+  {# TODO(ycchan): Add the tooltip. #}
+  <meta name="msapplication-tooltip" content="">
+  {# TODO(ycchan): Keep track of the number of pinned users. #}
+  <meta name="msapplication-starturl" content="http://{{ SITE_DOMAIN }}/?pinned=true">
+
+  <meta property="og:title" content="{% block og_title %}{{ SITE_NAME }}{% endblock %}">
+  {# TODO(ycchan): Add the description. #}
+  <meta property="og:description" content="{% block og_description %}{% endblock %}">
+  {# TODO(ycchan): Add the image. #}
+  <meta property="og:image" content="{% block og_image %}{% endblock %}">
+  <meta property="og:url" content="{% block og_url %}{% endblock %}">
+  <meta property="fb:app_id" content="{% block fb_app_id %}{% endblock %}">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta http-equiv="imagetoolbar" content="false">
+
+  <meta http-equiv="x-dns-prefetch-control" content="off">
+  <link rel="dns-prefetch" href="//ajax.googleapis.com" />
+  <link rel="dns-prefetch" href="//ssl.google-analytics.com" />
+  <link rel="dns-prefetch" href="//www.google-analytics.com" />
+
+  {#- TODO(ycchan): Place favicon.ico and apple-touch-icon.png in the root #}
+  {# directory: mathiasbynens.be/notes/touch-icons #}
+
+  {% compress css %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/h5bp-style-normalize.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/jquery-ui-1.10.4.custom.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/base.css">
+  {% block extra_head_base %}
+  {# Define CSS files to be included in site_base.html. #}
+  {% endblock extra_head_base %}
+  {% endcompress %}
+
+  {% block extra_head_css_uncompressed %}
+  {% endblock extra_head_css_uncompressed %}
+
+  {% compress css %}
+  {% block extra_head_css %}
+  {# Define CSS files to be included in individual pages. #}
+  {% endblock extra_head_css %}
+  {% endcompress %}
+
+  {% compress css %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/h5bp-style-helper.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/h5bp-style-media.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/h5bp-style-print.css">
+  {% endcompress %}
+
+  {# TODO(ycchan): Make a sitemap. #}
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+  {# TODO(ycchan): Add <link rel="canonical" href="" /> for each page. #}
+  {# TODO(ycchan): Add <link rel="pingback" href="" /> for pingbacks. #}
+
+  {% block cdn_libraries %}
+  {% if not is_cn %}
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL. -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  {% else %}
+  <script src="//apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  {% endif %}
+  {% endblock cdn_libraries %}
+
+  {% compress js %}
+  {# TODO(ycchan): For optimal performance, use a custom Modernizr build: #}
+  {# www.modernizr.com/download/ #}
+  <script src="{{ STATIC_URL }}pinax/js/modernizr-3.3.1.min.js"></script>
+  {% endcompress %}
+
+  {% compress js %}
+  {% block extra_head_js %}
+  {# Define JS to be included in individual pages. #}
+  {# This is a section only for scripts that have execution priority. #}
+  {% endblock extra_head_js %}
+  {% endcompress %}
+
+  {% block extra_head_js_uncompressed %}
+  {% endblock extra_head_js_uncompressed %}
+
+  {% block google_tag_manager %}
+  {% endblock google_tag_manager %}
+</head>
+
+<body class="wallpaper {% block body_class %}{% endblock body_class %}">
+  <div id="wrap">
+    <div>
+      {% block google_tag_manager_no_js %}{% endblock google_tag_manager_no_js %}
+      {% block site_header %}{% endblock site_header %}
+      {% block main_outer %}{% endblock main_outer %}
+    </div>
+  </div>
+
+  {% block site_footer %}{% endblock site_footer %}
+
+  {% compress js %}
+  <!-- Fall back to the local jQuery if necessary. -->
+  <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}pinax/js/jquery-1.11.0.min.js"><\/script>')</script>
+  <script>window.jQuery.ui || document.write('<script src="{{ STATIC_URL }}pinax/js/jquery-ui-1.10.4.custom.min.js"><\/script>')</script>
+
+  <script src="{{ STATIC_URL }}pinax/js/base.js"></script>
+  {% endcompress %}
+
+  {# TODO(kschan): js-compress the following block #}
+  <script src="{{ STATIC_URL }}js/slidesjs/slides.min.jquery.js"></script>
+
+  {% compress js %}
+  {% block extra_body_base %}
+  {# Define JS files to be included in site_base.html. #}
+  {% endblock extra_body_base %}
+  {% endcompress %}
+
+
+  {% block extra_body_js_uncompressed %}
+  {% endblock extra_body_js_uncompressed %}
+
+  {% compress js %}
+  {% block extra_body %}
+  {# Define JS files to be included in individual pages. #}
+  {% endblock extra_body %}
+  {% endcompress %}
+</body>
+
+</html>

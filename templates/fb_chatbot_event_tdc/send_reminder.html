@@ -1,0 +1,117 @@
+{% extends 'inspinia_base.html' %}
+
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block head_title_base %}HKTDC BOT Admin{% endblock %}
+{% block extra_head_css %}
+<style>
+#reminder-button {
+  height: 40px;
+  width: 100px;
+}
+#preview-button {
+  height: 40px;
+  width: 100px;
+}
+</style>
+{% endblock extra_head_css %}
+
+
+{% block sidebar_items %}
+<li>
+  <a href="{% url 'fb_chatbot_event_tdc_broadcast' fb_page_id=fb_page.pk %}">
+    <i class="fa fa-envelope"></i>
+    <span class="nav-label">Broadcast</span>
+  </a>
+</li>
+
+<li class="active">
+  <a href="{% url 'fb_chatbot_event_tdc_send_reminder' fb_page_id=fb_page.pk %}">
+    <i class="fa fa-envelope"></i>
+    <span class="nav-label">Send Reminder</span>
+  </a>
+</li>
+{% endblock sidebar_items %}
+
+
+{% block page_title %}Send Reminder{% endblock page_title %}
+
+
+{% block page_items %}
+<li><a href="{% url 'fb_chatbot_event_tdc_broadcast' fb_page_id=fb_page.pk %}">Home</a></li>
+<li><a href="{% url 'fb_chatbot_event_tdc_send_reminder' fb_page_id=fb_page.pk %}">Send Reminder</a></li>
+<li class="active"><a href="{% url 'fb_chatbot_event_tdc_send_reminder' fb_page_id=fb_page.pk %}"><strong>Preview Message</a></strong></li>
+{% endblock page_items %}
+
+
+{% block body_block %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Preview message</h5>
+      </div>
+      <div class="ibox-content">
+        <form class="form-horizontal" method="post">
+          {% csrf_token %}
+
+          {{ form.non_field_errors }}
+
+          <div class="form-group" id="form-group-event">
+            <label class="col-sm-2 control-label" for="{{ form.event.id_for_label }}">{{ form.event.label }}</label>
+            <div class="col-sm-10">
+            {% render_field form.event class="form-control m-b" %}
+            </div>
+            <div class="col-sm-4 col-sm-offset-2">
+              <button class="btn btn-primary" id="preview-button" type="submit" name="previewmsg">Preview</button>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label class="col-sm-2 control-label">Message example</label>
+            <div class="col-sm-10">
+              <div class="form-control-static" id="reminder-message"></div>
+            </div>
+          </div>
+
+          <div class="hr-line-dashed"></div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body_block %}
+
+
+{% block extra_body %}
+<script>
+  $('#preview-button').on('click', function(event){
+    event.preventDefault();
+    preview_reminder();
+  });
+
+  function preview_reminder() {
+    $.ajax({
+        url : "{% url 'fb_chatbot_event_tdc_send_reminder_preview' %}",
+        type: 'POST',
+        data : { id_event : $('#id_event').val() },
+
+        // handle a successful response
+        success : function(json) {
+          $('#results').html('');
+          $('#reminder-message').html(json.message +
+            '<div class="hr-line-dashed"></div>' +
+            '<button class="btn btn-primary" id="reminder-button" type="submit" name="sendmsg">Confirm</button>');
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+          $('#reminder-message').html('');
+          $('#form-group-event').addClass('has-error');
+        }
+    });
+  };
+</script>
+{% endblock extra_body %}

@@ -1,0 +1,53 @@
+{% extends 'dashboard_base.html' %}
+
+
+{% block head_title_base %}Convert Simply Dashboard{% endblock %}
+
+
+{% block main_outer %}
+<h1>{{ client.name }} Facebook/LinkedIn Campaign List</h1>
+<a href="{% url 'dashboard_logout' %}">Logout</a><br>
+<a href="{% url 'dashboard_create_shorten_links' %}">Create Shorten Link</a>
+
+{% for project in projects %}
+<div>
+  <h2>{{ project.name }}</h2>
+  {% if client.daily_report_required %}
+  (<a href="{% url 'dashboard_daily_report' project_id=project.id %}">Daily Report</a>)
+  {% endif %}
+
+  {% if client.country_breakdown_required %}
+  {% if project.is_facebook %}
+  (<a href="{% url 'dashboard_country_breakdown' project_id=project.id %}">Signup Breakdown</a>)
+  {% endif %}
+  {% endif %}
+
+  {% if client.signup_list_required %}
+  {% if project.is_facebook %}
+  (<a href="{% url 'dashboard_signup_list' project_id=project.id network='facebook' %}">Facebook Sign Up List</a>)
+  {% endif %}
+  {% if project.is_linkedin %}
+  (<a href="{% url 'dashboard_signup_list' project_id=project.id network='linkedin' %}">Linkedin Sign Up List</a>)
+  {% endif %}
+  {% if project.is_wechat %}
+  (<a href="{% url 'dashboard_signup_list' project_id=project.id network='wechat' %}">Wechat Sign Up List</a>)
+  {% endif %}
+  {% if project.is_twitter %}
+  (<a href="{% url 'dashboard_signup_list' project_id=project.id network='twitter' %}">Twitter Sign Up List</a>)
+  {% endif %}
+  {% if project.channel_set.exists %}
+  (<a href="{% url 'dashboard_channel_list' project_id=project.id %}">Other Channel Sign Up Breakdown</a>)
+  {% endif %}
+  {% endif %}
+</div>
+{% empty %}
+<div>
+  <h2>No projects are active.</h2>
+</div>
+{% endfor %}
+<div class='statement'>
+  <p>Note: The numbers provided on this dashboard is for your reference only and may be different from the actual spending due to technical constraints.
+  <br>If you need the accurate numbers of these campaigns, please kindly contact your Convert Simply account manager.
+  </p>
+</div>
+{% endblock main_outer %}

@@ -1,0 +1,20 @@
+{% extends 'dashboard_base.html' %}
+
+
+{% block head_title_base %}Convert Simply BOT Authentication{% endblock %}
+
+
+{% block main_outer %}
+<h1>Login to Convert Simply BOT Authentication</h1>
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}" />
+  {{ form.as_p }}
+
+  <button type="submit">Login</button>
+</form>
+{% endblock main_outer %}

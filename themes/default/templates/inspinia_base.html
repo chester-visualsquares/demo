@@ -1,0 +1,152 @@
+{% load compress %}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="{{ LANGUAGE_CODE }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+  {% block head_title_base %}{% endblock head_title_base %}
+  </title>
+
+  <link href="{{ STATIC_URL }}inspinia/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ STATIC_URL }}inspinia/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="{{ STATIC_URL }}inspinia/css/animate.css" rel="stylesheet">
+  <link href="{{ STATIC_URL }}inspinia/css/style.css" rel="stylesheet">
+
+
+  {% compress css %}
+  {% block extra_head_base %}
+  {# Define CSS files to be included in site_base.html. #}
+  {% endblock extra_head_base %}
+  {% endcompress %}
+
+
+  {% compress css %}
+  {% block extra_head_css %}
+  {# Define CSS files to be included in individual pages. #}
+  {% endblock extra_head_css %}
+  {% endcompress %}
+
+  {% block cdn_libraries %}
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL. -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  {% endblock cdn_libraries %}
+
+  {% compress js %}
+  {% block extra_head_js %}
+  {# Define JS to be included in individual pages. #}
+  {# This is a section only for scripts that have execution priority. #}
+  {% endblock extra_head_js %}
+  {% endcompress %}
+</head>
+
+<body class="wallpaper {% block body_class %}{% endblock body_class %}">
+  {% block extra_body_js %}{% endblock extra_body_js %}
+  <div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+      <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+
+          <li class="nav-header">
+          {% block sidebar_header %}
+            <div class="dropdown profile-element">
+              <span><img alt="image" class="img-circle" src="{{ STATIC_URL }}img/fb_chatbot_event_demo/convert_simply_logo.jpg" /></span>
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="clear">
+                    <span class="block m-t-xs">
+                      <strong class="font-bold">Convert Simply</strong>
+                    </span>
+                    <span class="text-muted text-xs block">Social media specialist <b class="caret"></b></span>
+                  </span>
+                </a>
+              <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                <li class="divider"></li>
+                <li><a href="{% block logout_url_1 %}{% url 'dashboard_logout' %}{% endblock logout_url_1 %}">Log out</a></li>
+              </ul>
+            </div>
+            <div class="logo-element">
+              <span><img alt="image" class="img-circle" src="{{ STATIC_URL }}img/fb_chatbot_event_demo/convert_simply_logo.jpg" /></span>
+            </div>
+          {% endblock sidebar_header %}
+          </li>
+
+          {% block sidebar_items %}{% endblock sidebar_items %}
+        </ul>
+      </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+      <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+          
+          <div class="navbar-header">
+            {% block topbar_header %}
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            {% endblock topbar_header %}
+          </div>
+          <ul class="nav navbar-top-links navbar-right">
+            {% block topbar_items %}
+            <li>
+              <span class="m-r-sm text-muted welcome-message">{% block welcome_message %}Welcome to Convert Simply.{% endblock welcome_message %}</span>
+            </li>
+
+            <li>
+              <a href="{% block logout_url_2 %}{% url 'dashboard_logout' %}{% endblock logout_url_2 %}">
+                <i class="fa fa-sign-out"></i> Log out
+              </a>
+            </li>
+            {% endblock topbar_items %}
+          </ul>
+
+        </nav>
+      </div>
+
+      <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+          <h2>{% block page_title %}{% endblock page_title %}</h2>
+          <ol class="breadcrumb">
+            {% block page_items %}
+            {% endblock page_items %}
+          </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+      </div>
+
+      <div class="wrapper wrapper-content animated fadeInRight">
+      {% block body_block %}
+      {% endblock body_block %}
+      </div>
+
+
+      <div class="footer" >
+      {% block footer %}{% endblock footer %}
+      </div>
+    </div>
+  </div>
+
+  {% block extra_body_base %}
+  <script src="{{ STATIC_URL }}inspinia/js/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}inspinia/js/inspinia.js"></script>
+  <script src="{{ STATIC_URL }}inspinia/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+  <script src="{{ STATIC_URL }}inspinia/js/plugins/pace/pace.min.js"></script>
+
+  <script src="{{ STATIC_URL }}inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+  {% endblock extra_body_base %}
+
+  {% compress js %}
+  {% block extra_body %}
+  {# Define JS files to be included in individual pages. #}
+  {% endblock extra_body %}
+  {% endcompress %}
+  <!-- Mainly scripts -->
+
+</body>
+</html>

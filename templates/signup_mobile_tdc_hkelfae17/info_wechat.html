@@ -1,0 +1,115 @@
+{% extends 'signup_mobile_templates/app_base.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKELFAE17_FB_APP_ID }}{% endblock %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKELFAE17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKELFAE17_OG_URL }}{% endblock %}
+
+{% block extra_head_css %}
+<style>
+html {
+  overflow: auto;
+}
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+body #wrap {
+  margin: 0px;
+}
+
+#canvas-wrap {
+  margin: 0px auto;
+
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  height: 750px;
+  width: 320px;
+  background-size: 320px 750px;
+  position: relative;
+
+  background-image: url('{{ STATIC_URL }}img/signup_mobile_tdc_hkelfae17/tdc_hkelfae17_info_mobile_bg_top_{{ request.language }}_v2.jpg');
+}
+#register-button {
+  height: 36px;
+  width: 247px;
+  display: block;
+  position: absolute;
+  top: 313px;
+  left: 37px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_info_mobile_{{ request.language }}.png');
+  background-size: 247px 36px;
+  background-color: transparent;
+}
+#footer-link {
+  position: absolute;
+  bottom: 62px;
+  left: 30px;
+
+  font-size: 8px;
+  font-style: italic;
+}
+#booth-link {
+  width: 213px;
+  position: absolute;
+  bottom: 127px;
+  left: 57px;
+  font-size: 7.5px;
+}
+#booth-link a:hover {
+  color: #ff7d00 !important;
+}
+#booth-application-1 {
+  color: #000000;
+  margin-bottom: 7px;
+}
+#booth-application-2 {
+  color: #000000;
+  margin-bottom: 7px;
+}
+#booth-application-3 {
+  color: #000000;
+  margin-bottom: 7px;
+}
+#booth-application-4 {
+  color: #000000;
+  margin-bottom: 7px;
+}
+#footer-link, #footer-link:visited {
+  color: #ff7d00;
+}
+#wc-button {
+  height: 44px;
+  width: 320px;
+  display: block;
+
+  position: absolute;
+  top: 708px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_wc_mob.jpg');
+  background-size: 320px 44px;
+  background-color: transparent;
+}
+</style>
+{% endblock extra_head_css %}
+
+{% block canvas_size %}628{% endblock %}
+{% block async_fb_jssdk %}{% endblock async_fb_jssdk %}
+{% block app_canvas %}
+<div id="canvas-wrap">
+  <a id="register-button" href="{{ next_url }}"></a>
+  <a id="wc-button" href="https://www.wavecommerce.hk/" target="_blank"></a>
+  <div id="booth-link">
+    <a id="booth-application-3" href="https://goo.gl/hfh7jE" target="_blank">{{  settings.SNM_TDC_HKELFAE17_FAIR_NAME_SC_LF  }} 2017</a>
+    <a id="booth-application-4" href="https://goo.gl/DWemXK" target="_blank">{{  settings.SNM_TDC_HKELFAE17_FAIR_NAME_SC_OL  }} 2017</a>
+  </div>
+  <a id="footer-link" href="http://www.hktdc.com/sc/" target="_blank">www.hktdc.com</a>
+</div>
+{% endblock app_canvas %}

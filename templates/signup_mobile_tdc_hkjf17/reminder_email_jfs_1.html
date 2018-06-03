@@ -1,0 +1,212 @@
+<div style="width: 650px; border: 1px solid #f47820;">
+<img src="http://d2dj4eyr0s9m9l.cloudfront.net/tdc_hkjf17_email_header_jfs.png" style="padding: 20px">
+<img src="{{ track_goal_url }}">
+<div style="margin: 20px">
+{% if contact.language == 'eng' %}
+This is an auto-generated email; please do not reply to the sender of this email.<br>
+
+<br>
+Dear Visitor,<br>
+
+<br>
+Thank you for reserving your free admission badge for the HKTDC {{ settings.SNM_TDC_HKJF17_FAIR_NAME_ENG_JFS }} via social media. The fair will be held <b>from {{ settings.SNM_TDC_HKJF17_START_DATE_JFS|date:"M j" }} - {{ settings.SNM_TDC_HKJF17_END_DATE_JFS|date:"M j Y" }},</b> at the <b>{{ settings.SNM_TDC_HKJF17_VENUE_ENG_JFS }}</b>.<br>
+
+<br>
+<b>Register for your FREE badge at the fairground:</b><br>
+If you have not completed the full online registration, please present either this email or the email confirmation sent to you earlier, along with your business card, to complete the registration for your FREE admission badge at the "Buyer Registration Counter" at the fairground. Your reference no. is <b>{{ contact.signup_code_jfs }}</b>.<br>
+
+<br>
+Kindly note that admission is open to trade visitors aged 18 or above only. The organiser shall verify the trade identity of registrants and reserves the right to refuse admission of any registrants who are deemed inappropriate.<br>
+
+<br>
+Trade Buyers visiting the Hong Kong International Jewellery Show during March 2 – March  6 are invited to redeem a Splendid Jewellery Tray Set and an Elegant Double-layer Jewellery Box.<br>
+
+<br>
+<b>Redemption Booth:</b><br>
+Hong Kong International Jewellery Show: “Visitor Promotion Counter” inside Hall 5G (5G-B29) at Hong Kong Convention &amp; Exhibition Centre
+<br>
+
+<br>
+<b>Terms &amp; Conditions for Souvenir Redemption</b><br>
+Souvenirs are available on a first-come-first-served basis. You must visit the redemption booths with this email, your validated buyer badge and your business card in person to redeem the souvenir.  Each person is only entitled to one set of souvenir at each fair. Souvenir cannot be redeemed in conjunction with other HKTDC promotions. Hand-written business card will not be accepted. Company name and buyer name on the business card must be identical to the validated buyer badge. In case of any dispute, the decision of HKTDC shall be final and binding.<br>
+
+<br>
+<b>Highlighted Event for Buyer</b><br>
+<u>Confidence &amp; Reputation—Responsibility and Mission of Testing Technology of Diamond
+</u><br>
+Date: 2 / 3 / 2017 (Thursday)<br>
+Time: 2:30pm – 4:30pm<br>
+Venue: Meeting Room S226-227, HKCEC<br>
+Language: English<br>
+<a href="http://m.hktdc.com/fair/hkjewellery-en/s/8680-General_Information/HKTDC-Hong-Kong-International-Jewellery-Show/Event-Schedule.html">Register here</a><br>
+
+<br>
+For more fair information, please visit the <a href="http://m.hktdc.com/fair{{ settings.SNM_TDC_HKJF17_EVENT_PAGE_URL_STR_JFS }}-en/" target="_blank">{{ settings.SNM_TDC_HKJF17_FAIR_NAME_ENG_JFS }}</a>. For enquiries, please email <a href="mailto:exhibitions@hktdc.org" target="_blank">exhibitions@hktdc.org</a> or call our Customer Service Line (852) 1830 668.<br>
+
+<br>
+Exhibitions Department<br>
+Hong Kong Trade Development Council<br>
+Unit 13, Expo Galleria<br>
+Hong Kong Convention and Exhibition Centre<br>
+1 Expo Drive, Wan Chai, Hong Kong<br>
+
+<br>
+<hr>
+<b>Sourcing on the go - tailor-made exhibition info on your mobile</b><br>
+
+<br>
+<b>Smartphone Info Site</b><br>
+With the <b>HKTDC Smartphone Info Site</b>, you can now pre-register for fairs and get your free admission badge* anywhere and anytime. All information regarding HKTDC fairs, including event schedule, list of exhibitors, plus practical tips on getting around Hong Kong can be conveniently accessed.<br>
+
+<br>
+Download your <b>HKTDC Mobile</b> now at:<br>
+- <a href="http://itunes.apple.com/app/hktdc-mobile/id333142404?mt=8" target="_blank">iPhone App Store</a> for iPhone users<br>
+- <a href="https://play.google.com/store/apps/details?id=com.hktdc.hktdcmobile&amp;feature=more_from_developer&amp;hl=en" target="_blank">Google Play</a> for Android phone users<br>
+
+<br>
+<b>Mobile Info Site</b><br>
+Information of 30 fairs is now available at the HKTDC Mobile Info Site - hktdc.com/wap/en. Browse it and use it to get free admission badge*.<br>
+
+<br>
+<span style="font-style: italic;">* The organiser shall verify the trade identity of registrants and reserves the right to refuse admission of any registrants</span><br>
+{% elif contact.language == 'chi' %}
+此乃香港貿易發展局服務推介信息<br>
+
+<br>
+這是自動發送電郵，請毋須回覆寄件者。<br>
+
+<br>
+親愛的買家:<br>
+
+<br>
+多謝閣下透過社交媒體預留免費入場證參觀香港貿發局{{ settings.SNM_TDC_HKJF17_FAIR_NAME_CHI_JFS }}。展覽定於<b>{{ settings.SNM_TDC_HKJF17_START_DATE_JFS|date:"Y年n月j日" }}至{{ settings.SNM_TDC_HKJF17_END_DATE_JFS|date:"n月j日" }}假{{ settings.SNM_TDC_HKJF17_VENUE_CHI_JFS }}舉行</b>。<br>
+
+<br>
+<b>到會場登記索取免費入場證:</b><br>
+如您尚未填寫網上登記表格，屆時請到會場的「買家登記處」出示本電郵或您之前收到的確認電郵，以及您的公司名片，以完成登記程序索取免費入場證。您的參考編號為：<b>{{ contact.signup_code_jfs }}</b>。<br>
+
+<br>
+展會只供18歲或以上的業內人士進場參觀。主辦單位將會復核登記人士的業內身份，並保留發入場證的決定權。<br>
+
+<br>
+業內買家凡於3月2日至3月6日期間親臨參觀香港國際珠寶展，即可憑此電郵免費換領 精緻閃亮飾物盤套裝 及 精美實用珠寶首飾盒 各一份。<br>
+
+<br>
+<b>換領攤位:</b><br>
+香港國際珠寶展:會議展覽中心內5G展覽廳中的5G-B29之「買家推廣櫃台」<br>
+
+<br>
+<b>換領紀念品須知:</b><br>
+紀念品數量有限，先到先得，送完即止。閣下必須攜同閣下之已確認的買家入場證、個人公司名片及此郵件副本親臨上述換領地點以換取紀念品。每人於各展覽期間只能換領紀念品乙份。以上優惠不能與其它貿發局優惠一併使用。手寫名片一概不接受。名片上的資料必須與買家證上的資料相符。如有任何爭議，香港貿發局保留最終決定權。<br>
+
+<br>
+<b>重點活動推介：</b><br>
+「信心 信譽—鑽石檢測科技應有的責任與使命」研討會<br>
+日期: 2 / 3 / 2017 (星期四)<br>
+時間: 2:30pm – 4:30pm<br>
+地點: 香港會議展覽中心L2會議室S226-227<br>
+講者: 國家珠寶玉石質量監督檢驗中心代表<br>
+語言: 英語及普通話（提供即時傳譯服務）<br>
+<a href="http://m.hktdc.com/fair/hkjewellery-en/s/8680-General_Information/HKTDC-Hong-Kong-International-Jewellery-Show/Event-Schedule.html">按此註冊</a><br>
+
+<br>
+有關展覽詳情，請瀏覽<a href="http://m.hktdc.com/fair{{ settings.SNM_TDC_HKJF17_EVENT_PAGE_URL_STR_JFS }}-tc/" target="_blank">{{ settings.SNM_TDC_HKJF17_FAIR_NAME_CHI_JFS }}</a>網頁。<br>
+如有查詢，請電郵: <a href="mailto:exhibitions@hktdc.org" target="_blank">exhibitions@hktdc.org</a> 或致電客戶服務專線(852) 1830 668。<br>
+
+<br>
+香港貿易發展局<br>
+展覽事務部<br>
+香港灣仔博覽道1號<br>
+香港會議展覽中心博覽商場13號<br>
+
+<br>
+<hr>
+<b>源源商機盡在手中 — 手機版展覽會資訊</b><br>
+
+<br>
+<b>智能手機資訊站</b><br>
+有了這個<b>香港貿發局智能手機資訊站</b>，您可以隨時隨地登記索取展覽會免費入場證*，同時獲取香港貿發局的展覽資料，如研討會及活動程序、參展商名單及赴港實用資訊。<br>
+
+<br>
+立即透過以下途徑下載<b>HKTDC Mobile</b><br>
+- iPhone用戶請登入<a href="http://itunes.apple.com/app/hktdc-mobile/id333142404?mt=8" target="_blank">iPhone App Store:</a><br>
+- Android手機用戶請登入<a href="https://play.google.com/store/apps/details?id=com.hktdc.hktdcmobile&amp;feature=more_from_developer&amp;hl=zh_TW" target="_blank">Google Play</a><br>
+
+<br>
+<b>手機資訊站</b><br>
+透過<b>香港貿發局手機資訊站</b>—hktdc.com/wap，您可隨時隨地瀏覽30個展覽資訊，並索取免費入場證*。<br>
+
+<br>
+<span style="font-style: italic;">* 主辦單位將會復核登記人士的業內身份，並保留發入場證的決定權。</span><br>
+{% elif contact.language == 'sc' %}
+此乃香港贸易发展局服务推介信息<br>
+
+<br>
+这是自动发送电邮，请毋须回覆寄件者。 <br>
+
+<br>
+亲爱的买家:<br>
+
+<br>
+多谢阁下透过社交媒体预留免费入场证参观香港贸发局{{ settings.SNM_TDC_HKJF17_FAIR_NAME_SC_JFS }}。展览定于<b>{{ settings.SNM_TDC_HKJF17_START_DATE_JFS|date:"Y年n月j日" }}至{{ settings.SNM_TDC_HKJF17_END_DATE_JFS|date:"n月j日" }}假{{ settings.SNM_TDC_HKJF17_VENUE_SC_JFS }}举行</b>。<br>
+
+<br>
+<b>到会场登记索取免费入场证:</b><br>
+如您尚未填写成网上登记表格，届时请到会场的「买家登记处」出示本电邮或您之前收到的确认电邮，以及您的公司名片，以完成登记程序索取免费入场证。您的参考编号为：<b>{{ contact.signup_code_jfs }}</b>。<br>
+
+<br>
+展会只供18岁或以上的业内人士进场参观。主办单位将会复核登记人士的业内身份，并保留发入场证的决定权。 <br>
+
+<br>
+业内买家凡于3月2日至3月6日期间亲临参观香港国际珠宝展，即可凭此电邮免费换领 精致闪亮饰物盘套装 及 精美实用珠宝首饰盒 各一份。<br>
+
+<br>
+<b>换领摊位:</b><br>
+香港国际珠宝展:会议展览中心内5G展览厅中的5G-B29之「买家推广柜台」<br>
+
+<br>
+<b>换领纪念品须知:</b><br>
+纪念品数量有限，先到先得，送完即止。阁下必须携同阁下之已确认的买家入场证、个人公司名片及此邮件副本亲临上述换领地点以换取纪念品。每人于各展览期间只能换领纪念品乙份。以上优惠不能与其它贸发局优惠一并使用。手写名片一概不接受。名片上的资料必须与买家证上的资料相符。如有任何争议，香港贸发局保留最终决定权。<br>
+
+<br>
+<b>重点活动推介：</b><br>
+「信心 信誉—钻石检测科技应有的责任与使命」研讨会<br>
+日期: 2 / 3 / 2017 (星期四)<br>
+时间: 2:30pm – 4:30pm<br>
+地点: 香港会议展览中心L2会议室S226-227<br>
+讲者: 国家珠宝玉石质量监督检验中心代表<br>
+语言:  英语及普通话（提供即时传译服务）<br>
+<a href="http://m.hktdc.com/fair/hkjewellery-en/s/8680-General_Information/HKTDC-Hong-Kong-International-Jewellery-Show/Event-Schedule.html">按此注册</a><br>
+
+<br>
+有关展览详情，请浏览<a href="http://m.hktdc.com/fair{{ settings.SNM_TDC_HKJF17_EVENT_PAGE_URL_STR_JFS }}-sc/" target="_blank">{{ settings.SNM_TDC_HKJF17_FAIR_NAME_SC_JFS }}</a>网页。 <br>
+如有查询，请电邮: <a href="mailto:exhibitions@hktdc.org" target="_blank">exhibitions@hktdc.org</a> 或致电客户服务专线(852) 1830 668。 <br>
+
+<br>
+香港贸易发展局<br>
+展览事务部<br>
+香港湾仔博览道1号<br>
+香港会议展览中心博览商场13号<br>
+
+<br>
+<hr>
+<b>源源商机尽在手中— 手机版展览会资讯</b><br>
+
+<br>
+<b>智能手机资讯站</b><br>
+有了这个<b>香港贸发局智能手机资讯站</b>，您可以随时随地登记索取展览会免费入场证*，同时获取香港贸发局的展览资料，如研讨会及活动程序、参展商名单及赴港实用资讯。 <br>
+
+<br>
+立即透过以下途径下载<b>HKTDC Mobile</b><br>
+- iPhone用户请登入<a href="http://itunes.apple.com/app/hktdc-mobile/id333142404?mt=8" target="_blank">iPhone App Store:</a><br>
+- Android手机用户请登入<a href="https://play.google.com/store/apps/details?id=com.hktdc.hktdcmobile&amp;feature=more_from_developer&amp;hl=zh_CN" target="_blank">Google Play</a ><br>
+
+<br>
+<b>手机资讯站</b><br>
+透过<b>香港贸发局手机资讯站</b>—hktdc.com/wap，您可随时随地浏览30个展览资讯，并索取免费入场证*。 <br>
+
+<br>
+<span style="font-style: italic;">* 主办单位将会复核登记人士的业内身份，并保留发入场证的决定权。</span><br>
+{% endif %}
+</div>
+</div>

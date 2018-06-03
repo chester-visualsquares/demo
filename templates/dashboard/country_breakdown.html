@@ -1,0 +1,71 @@
+{% extends 'dashboard_base.html' %}
+
+{% load humanize %}
+{% load dashboard_extras %}
+
+
+{% block head_title_base %}Convert Simply Dashboard{% endblock %}
+
+
+{% block main_outer %}
+{% if signup_breakdown %}
+<h1>{{ project.name }} Signup Breakdown</h1>
+{% else %}
+<h1>{{ project.name }} Country Breakdown</h1>
+{% endif %}
+<a href="{% url 'dashboard_logout' %}">Logout</a>
+
+<div>
+  <br>
+  <a href="{% url 'dashboard_download_report' project_id=project.pk report_type='country-breakdown' %}">Download Country Breakdown Report</a><br>
+  <a href="{% url 'dashboard_projects' %}">Back to Campaign List</a>
+</div>
+
+{% if signup_breakdown %}
+<div>
+  <br>
+  {% for category, count in signup_breakdown.iteritems %}
+  <b>{{ category }}: {{ count }}</b><br>
+  {% endfor %}
+  <br>
+</div>
+{% endif %}
+
+<table id="country-breakdown" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>{{ project.country_field_name|title }}</th>
+      <th># of Reg</th>
+    </tr>
+  </thead>
+
+  <tfoot>
+    <tr>
+      <th>{{ project.country_field_name|title }}</th>
+      <th># of Reg</th>
+    </tr>
+  </tfoot>
+
+  <tbody>
+    {% for countrystats in countrystats_set %}
+    <tr>
+      <td class="dt-center">{{ countrystats|get_item:project.country_field_name|country_name }}</td>
+      <td class="dt-center">{{ countrystats.count }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock main_outer %}
+
+
+{% block extra_body %}
+<script>
+  $(document).ready(function() {
+    $('#country-breakdown').dataTable({
+      'searching': false,
+      'paging': false,
+      'order': []
+    });
+  });
+</script>
+{% endblock extra_body %}

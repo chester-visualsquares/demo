@@ -1,0 +1,57 @@
+{% extends 'dashboard_base.html' %}
+{% load common_extras %}
+
+{% block head_title_base %}Convert Simply Shorten Link Creation{% endblock %}
+
+{% block extra_head_css %}
+<style>
+a {
+  display: block;
+}
+div {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+#project-container, #name-container , #platform-container {
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+#channel {
+  padding-top: 10px;
+}
+#error-container {
+  display: inline-block;
+  color: red;
+}
+</style>
+{% endblock extra_head_css %}
+
+{% block main_outer %}
+<div>
+<h1>Convert Simply Shorten Link Creation</h1>
+<a href="{% url 'dashboard_projects' %}">Go to Campaign List</a>
+<a href="{% url 'dashboard_logout' %}">Logout</a>
+</div>
+
+<form id="channel" method="post" action="">
+  {% csrf_token %}
+  <div id="project-container">
+    Project: {{ form.project }}
+    <div id="error-container">
+      {{ form.non_field_errors.as_text }}
+    </div>
+  </div>
+  <div id="name-container">
+    Name: {{ form.name }} <i>(e.g. Wechat Promotor, HWHT IG,...)</i>
+    <div id="error-container">
+      {{ form.name.errors.as_text }}
+    </div>
+  </div>
+  <div id="platform-container">
+    Platform: {{ form.platform }}
+  </div>
+  <div id="submit-container">
+    <input type="submit">
+  </div>
+</form>
+{% endblock main_outer %}

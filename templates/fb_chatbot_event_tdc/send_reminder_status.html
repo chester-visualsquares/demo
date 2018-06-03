@@ -1,0 +1,58 @@
+{% extends 'inspinia_base.html' %}
+
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block head_title_base %}HKTDC BOT Admin{% endblock %}
+{% block extra_head_css %}
+{% endblock extra_head_css %}
+
+
+{% block sidebar_items %}
+<li>
+  <a href="{% url 'fb_chatbot_event_tdc_broadcast' fb_page_id=fb_page.pk %}">
+    <i class="fa fa-envelope"></i>
+    <span class="nav-label">Broadcast</span>
+  </a>
+</li>
+
+<li class="active">
+  <a href="{% url 'fb_chatbot_event_tdc_send_reminder' fb_page_id=fb_page.pk %}">
+    <i class="fa fa-envelope"></i>
+    <span class="nav-label">Send Reminder</span>
+  </a>
+</li>
+{% endblock sidebar_items %}
+
+
+{% block page_title %}Send Reminder{% endblock page_title %}
+
+
+{% block page_items %}
+<li><a href="{% url 'fb_chatbot_event_tdc_broadcast' fb_page_id=fb_page.pk %}">Home</a></li>
+<li><a href="{% url 'fb_chatbot_event_tdc_send_reminder' fb_page_id=fb_page.pk %}">Send Reminder</a></li>
+<li class="active"><a href="{% url 'fb_chatbot_event_tdc_send_reminder' fb_page_id=fb_page.pk %}"><strong>Delivery Status</a></strong></li>
+{% endblock page_items %}
+
+
+{% block body_block %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Delivery Status</h5>
+      </div>
+      <div class="ibox-content">
+        {% if messages %}
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        <div class="m-t text-righ">
+          <a href="{% url 'fb_chatbot_event_tdc_send_reminder' fb_page_id=fb_page.pk %}" class="btn btn-outline btn-primary" id="back-button"><i class="fa fa-long-arrow-left"></i> Back to Preview Message</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body_block %}

@@ -1,0 +1,81 @@
+{% extends 'dashboard_base.html' %}
+
+{% load humanize %}
+
+
+{% block head_title_base %}Convert Simply Dashboard{% endblock %}
+
+
+{% block main_outer %}
+<h1>{{ project.name }} Daily Report</h1>
+<a href="{% url 'dashboard_logout' %}">Logout</a>
+
+<div>
+  <br>
+  <a href="{% url 'dashboard_download_report' project_id=project.pk report_type='daily-report' %}">Download Report</a><br>
+  <a href="{% url 'dashboard_projects' %}">Back to Campaign List</a>
+</div>
+
+<table id="daily-report" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Impressions</th>
+      <th>Spending ($)</th>
+      <th>Link Clicks</th>
+      <th># of Registrations</th>
+      <th>CPA</th>
+    </tr>
+  </thead>
+
+  <tfoot>
+    <tr>
+      <th>Total</th>
+      <th>{{ adstats.impressions|intcomma }}</th>
+      <th>${{ adstats.dollar_spent|floatformat:"2"|intcomma }}</th>
+      <th>{{ adstats.link_clicks|intcomma }}</th>
+      <th>{{ adstats.conversions|intcomma }}</th>
+      {% if  adstats.dollar_cpa %}
+      <th>${{ adstats.dollar_cpa|floatformat:"2"|intcomma }}</th>
+      {% else %}
+      <th>N/A</th>
+      {% endif %}
+    </tr>
+  </tfoot>
+
+  <tbody>
+    {% for adstats in dailyadstats_set %}
+    <tr>
+      <td class="dt-center">{{ adstats.date }}</td>
+      <td class="dt-center">{{ adstats.impressions|intcomma }}</td>
+      <td class="dt-center">${{ adstats.dollar_spent|floatformat:"2"|intcomma }}</td>
+      <td class="dt-center">{{ adstats.link_clicks|intcomma }}</td>
+      <td class="dt-center">{{ adstats.conversions|intcomma }}</td>
+      {% if  adstats.dollar_cpa %}
+      <td class="dt-center">${{ adstats.dollar_cpa|floatformat:"2"|intcomma }}</td>
+      {% else %}
+      <td class="dt-center">N/A</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class='statement'>
+  <p>Note: The numbers provided on this dashboard is for your reference only and may be different from the actual spending due to technical constraints.
+  <br>If you need the accurate numbers of these campaigns, please kindly contact your Convert Simply account manager.
+  </p>
+</div>
+{% endblock main_outer %}
+
+
+{% block extra_body %}
+<script>
+  $(document).ready(function() {
+    $('#daily-report').dataTable({
+      'searching': false,
+      'paging': false,
+      'order': []
+    });
+  });
+</script>
+{% endblock extra_body %}

@@ -1,0 +1,73 @@
+{% extends 'dashboard_base.html' %}
+
+{% load dashboard_extras %}
+
+
+{% block head_title_base %}Convert Simply Dashboard{% endblock %}
+
+{% block extra_head_css %}
+<style>
+div {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+</style>
+{% endblock extra_head_css %}
+
+{% block main_outer %}
+<h1>{{ project.name }} Other Channels Signup</h1>
+<a href="{% url 'dashboard_logout' %}">Logout</a>
+
+<div>
+  <br>
+  <a href="{% url 'dashboard_download_report' project_id=project.pk report_type='channel-list' %}">Download Channel Report</a><br>
+  <a href="{% url 'dashboard_create_shorten_links' %}">Create Shorten Link</a><br>
+  <a href="{% url 'dashboard_projects' %}">Back to Campaign List</a>
+</div>
+
+<table id="channel-list" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      {% for channel_report_field in channel_report_fields %}
+      <th>{{ channel_report_field }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+
+  <tfoot>
+    <tr>
+      {% for channel_report_field in channel_report_fields %}
+      <th>{{ channel_report_field }}</th>
+      {% endfor %}
+    </tr>
+  </tfoot>
+
+  <tbody>
+    {% for channel in channel_report %}
+    <tr>
+      {% for channel_report_field in channel_report_fields %}
+      <td class="dt-center">{{ channel|get_item:channel_report_field }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class='statement'>
+  <p>Note: The numbers provided on this dashboard is for your reference only and may be different from the actual spending due to technical constraints.
+  <br>If you need the accurate numbers of these campaigns, please kindly contact your Convert Simply account manager.
+  </p>
+</div>
+{% endblock main_outer %}
+
+
+{% block extra_body %}
+<script>
+  $(document).ready(function() {
+    $('#channel-list').dataTable({
+      'searching': false,
+      'paging': false,
+      'order': [[ 0, "desc"]]
+    });
+  });
+</script>
+{% endblock extra_body %}

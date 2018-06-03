@@ -1,0 +1,97 @@
+{% load compress %}
+
+
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]>
+<html class="no-js ie6 oldie" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+<!--[if IE 7 ]>
+<html class="no-js ie7 oldie" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8 oldie" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="{{ LANGUAGE_CODE }}">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="{{ LANGUAGE_CODE }}">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+
+  <title>
+    {% block head_title_base %}{% endblock head_title_base %}
+  </title>
+
+  {# TODO(ycchan): Add the description. #}
+  <meta name="description" content="">
+  <meta name="author" content="{% block meta_author %}{{ SITE_NAME }}{% endblock %}">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  {% compress css %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/normalize.css">
+  {% block extra_head_base %}
+  {# Define CSS files to be included in site_base.html. #}
+  {% endblock extra_head_base %}
+  {% endcompress %}
+
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+  <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+  {% compress css %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/dashboard_base.css">
+  {% block extra_head_css %}
+  {# Define CSS files to be included in individual pages. #}
+  {% endblock extra_head_css %}
+  {% endcompress %}
+
+  {% block cdn_libraries %}
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL. -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  {% endblock cdn_libraries %}
+
+  {% compress js %}
+  {% block extra_head_js %}
+  {# Define JS to be included in individual pages. #}
+  {# This is a section only for scripts that have execution priority. #}
+  {% endblock extra_head_js %}
+  {% endcompress %}
+</head>
+
+<body class="wallpaper {% block body_class %}{% endblock body_class %}">
+  <div id="wrap">
+    <div>
+      {% block site_header %}{% endblock site_header %}
+      {% block main_outer %}{% endblock main_outer %}
+    </div>
+  </div>
+
+  {% compress js %}
+  <!-- Fall back to the local jQuery if necessary. -->
+  <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}pinax/js/jquery-1.6.3.min.js"><\/script>')</script>
+
+  <script src="{{ STATIC_URL }}pinax/js/base.js"></script>
+  {% endcompress %}
+
+  {% compress js %}
+  {% block extra_body_base %}
+  {# Define JS files to be included in site_base.html. #}
+  {% endblock extra_body_base %}
+  {% endcompress %}
+
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+
+  {% compress js %}
+  {% block extra_body %}
+  {# Define JS files to be included in individual pages. #}
+  {% endblock extra_body %}
+  {% endcompress %}
+</body>
+
+</html>

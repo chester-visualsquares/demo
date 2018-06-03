@@ -1,0 +1,156 @@
+<div style="width: 650px; border: 1px solid #ff7d00;">
+<img src="http://d2dj4eyr0s9m9l.cloudfront.net/tdc_hkelfae17_email_header_elec.png" style="padding: 20px">
+<img src="{{ track_goal_url }}">
+<div style="margin: 20px">
+{% if contact.language == 'eng' %}
+This is an auto-generated email, please do not reply to the sender of this email.<br>
+
+<br>
+Dear Visitor,<br>
+
+<br>
+Thank you for reserving your free admission badge for <b>HKTDC {{ settings.SNM_TDC_HKELFAE17_FAIR_NAME_ENG_EF }}</b> via the social media platform. The fair will be held at the {{ settings.SNM_TDC_HKELFAE17_VENUE_ENG_EF }} on {{ settings.SNM_TDC_HKELFAE17_START_DATE_EF|date:"M j" }} - {{ settings.SNM_TDC_HKELFAE17_END_DATE_EF|date:"M j Y" }}.<br>
+
+<br>
+<b>Register for your FREE badge at the fairground:</b><br>
+Please present this email along with your business card, to complete registration from the “Buyer Registration Counter” at the fairground. Your Reference No. is <b>{{ contact.signup_code_elec }}</b>.<br>
+
+<br>
+In order to get the admission badge, a registration form has to be completed. To save your time, you are encouraged to register <a href="{{ settings.SNM_TDC_HKELFAE17_FULL_FORM_URL_ENG_EF }}" target="_blank">here</a> in advance and receive your badge by mail.<br>
+
+<br>
+Should you require more information about the fair, please visit the <a href="http://www.hktdc.com/fair{{ settings.SNM_TDC_HKELFAE17_EVENT_PAGE_URL_STR_EF }}-en/" target="_blank">{{ settings.SNM_TDC_HKELFAE17_FAIR_NAME_ENG_EF }}</a> event page. Admission is open to trade visitors aged 18 or above only. The Organiser shall verify the trade identity of registrants and reserves the right to refuse admission of any registrants who are deemed inappropriate.<br>
+
+<br>
+For enquiries, please email <a href="mailto:exhibitions@hktdc.org" target="_blank">exhibitions@hktdc.org</a> or call our Customer Service Line (852) 1830 668.<br>
+
+<br>
+Exhibitions Department<br>
+Hong Kong Trade Development Council<br>
+Unit 13, Expo Galleria<br>
+Hong Kong Convention and Exhibition Centre<br>
+1 Expo Drive, Wan Chai, Hong Kong<br>
+<br>
+
+<br>
+<hr>
+<b>Sourcing on the go - tailor-made exhibition info on your mobile</b><br>
+
+<br>
+<b>Smartphone Info Site</b><br>
+With the <b>HKTDC Smartphone Info Site</b>, you can now pre-register for fairs and get your free admission badge* anywhere and anytime. All information regarding HKTDC fairs, including event schedule, list of exhibitors, plus practical tips on getting around Hong Kong can be conveniently accessed.<br>
+
+<br>
+Download your <b>HKTDC Mobile</b> now at:<br>
+- <a href="http://itunes.apple.com/app/hktdc-mobile/id333142404?mt=8" target="_blank">iPhone App Store</a> for iPhone users<br>
+- <a href="https://play.google.com/store/apps/details?id=com.hktdc.hktdcmobile&amp;feature=more_from_developer&amp;hl=en" target="_blank">Google Play</a> for Android phone users<br>
+
+<br>
+<b>Mobile Info Site</b><br>
+Information of 30 fairs is now available at the HKTDC Mobile Info Site - hktdc.com/wap/en. Browse it and use it to get free admission badge*.<br>
+
+<br>
+<span style="font-style: italic;">* The organiser shall verify the trade identity of registrants and reserves the right to refuse admission of any registrants who are deemed inappropriate.</span><br>
+{% elif contact.language == 'chi' %}
+此乃香港貿易發展局服務推介信息<br>
+
+<br>
+這是自動發送電郵，請毋須回覆寄件者。<br>
+
+<br>
+親愛的買家:<br>
+
+<br>
+多謝閣下透過社交媒體預留免費入場證參觀<b>香港貿發局{{ settings.SNM_TDC_HKELFAE17_FAIR_NAME_CHI_EF }}</b>。展覽定於{{ settings.SNM_TDC_HKELFAE17_START_DATE_EF|date:"Y年n月j日" }}至{{ settings.SNM_TDC_HKELFAE17_END_DATE_EF|date:"n月j日" }}假{{ settings.SNM_TDC_HKELFAE17_VENUE_CHI_EF }}舉行。<br>
+
+<br>
+<b>到會場登記索取免費入場證:</b><br>
+屆時請到會場的「買家登記處」出示本電郵，以及您的公司名片，以完成登記程序索取*免費入場證。您的參考編號為<b>{{ contact.signup_code_elec }}</b>。<br>
+
+<br>
+買家需填寫登記表格，方可獲得入場證。為節省閣下時間，我們鼓勵閣下立即<a href="{{ settings.SNM_TDC_HKELFAE17_FULL_FORM_URL_CHI_EF }}" target="_blank">按此</a>進行網上登記以用郵寄方式收取買家入場證。<br>
+
+<br>
+有關展覽詳情，請瀏覽<a href="http://www.hktdc.com/fair{{ settings.SNM_TDC_HKELFAE17_EVENT_PAGE_URL_STR_EF }}-tc/" target="_blank">{{ settings.SNM_TDC_HKELFAE17_FAIR_NAME_CHI_EF }}</a>網頁。展會只供18歲或以上的業內人士進場參觀。主辦單位將會復核登記人士的業內身份，並保留發入場證的決定權。<br>
+
+<br>
+如有查詢，請電郵: <a href="mailto:exhibitions@hktdc.org" target="_blank">exhibitions@hktdc.org</a> 或致電客戶服務專線 (852) 1830 668。<br>
+
+<br>
+香港貿易發展局<br>
+展覽事務部<br>
+香港灣仔博覽道1號<br>
+香港會議展覽中心博覽商場13號<br>
+
+<br>
+<hr>
+<b>源源商機盡在手中 — 手機版展覽會資訊</b><br>
+
+<br>
+<b>智能手機資訊站</b><br>
+有了這個<b>香港貿發局智能手機資訊站</b>，您可以隨時隨地登記索取展覽會免費入場證*，同時獲取香港貿發局的展覽資料，如研討會及活動程序、參展商名單及赴港實用資訊。<br>
+
+<br>
+立即透過以下途徑下載<b>HKTDC Mobile</b><br>
+- iPhone用戶請登入<a href="http://itunes.apple.com/app/hktdc-mobile/id333142404?mt=8" target="_blank">iPhone App Store:</a><br>
+- Android手機用戶請登入<a href="https://play.google.com/store/apps/details?id=com.hktdc.hktdcmobile&amp;feature=more_from_developer&amp;hl=zh_TW" target="_blank">Google Play</a><br>
+
+<br>
+<b>手機資訊站</b><br>
+透過<b>香港貿發局手機資訊站</b>—hktdc.com/wap，您可隨時隨地瀏覽30個展覽資訊，並索取免費入場證*。<br>
+
+<br>
+<span style="font-style: italic;">* 主辦單位將會復核登記人士的業內身份，並保留發入場證的決定權。</span><br>
+{% elif contact.language == 'sc' %}
+此乃香港贸易发展局服务推介信息<br>
+
+<br>
+这是自动发送电邮，请勿须回覆寄件者。 <br>
+
+<br>
+亲爱的买家:<br>
+
+<br>
+多谢阁下透过社交媒体预留免费入场证参观<b>香港贸发局{{ settings.SNM_TDC_HKELFAE17_FAIR_NAME_SC_EF }}</b>。展览定於{{ settings.SNM_TDC_HKELFAE17_START_DATE_EF|date:"Y年n月j日" }}至{{ settings.SNM_TDC_HKELFAE17_END_DATE_EF|date:"n月j日" }}假{{ settings.SNM_TDC_HKELFAE17_VENUE_SC_EF }}举行。<br>
+
+<br>
+<b>到会场登记索取免费入场证:</b><br>
+届时请到会场的「买家登记处」出示本电邮，以及您的公司名片，以完成登记程序索取*免费入场证。您的参考编号为<b>{{ contact.signup_code_elec }}</b>。 <br>
+
+<br>
+买家需填写登记表格，方可获得入场证。为节省阁下时间，我们鼓励阁下立即<a href="{{ settings.SNM_TDC_HKELFAE17_FULL_FORM_URL_SC_EF }}" target="_blank">按此</a>进行网上登记以用邮寄方式收取买家入场证。 <br>
+
+<br>
+有关展览详情，请浏览<a href="http://www.hktdc.com/fair{{ settings.SNM_TDC_HKELFAE17_EVENT_PAGE_URL_STR_EF }}-sc/" target="_blank">{{ settings.SNM_TDC_HKELFAE17_FAIR_NAME_SC_EF }}</a>网页。展会只供18岁或以上的业内人士进场参观。主办单位将会复核登记人士的业内身份，并保留发入场证的决定权。 <br>
+
+<br>
+如有查询，请电邮: <a href="mailto:exhibitions@hktdc.org" target="_blank">exhibitions@hktdc.org</a> 或致电客户服务专线 (852) 1830 668。 <br>
+
+<br>
+香港贸易发展局<br>
+展览事务部<br>
+香港湾仔博览道1号<br>
+香港会议展览中心博览商场13号<br>
+
+<br>
+<hr>
+<b>源源商机尽在手中— 手机版展览会资讯</b><br>
+
+<br>
+<b>智能手机资讯站</b><br>
+有了这个<b>香港贸发局智能手机资讯站</b>，您可以随时随地登记索取展览会免费入场证*，同时获取香港贸发局的展览资料，如研讨会及活动程序、参展商名单及赴港实用资讯。 <br>
+
+<br>
+立即透过以下途径下载<b>HKTDC Mobile</b><br>
+- iPhone用户请登入<a href="http://itunes.apple.com/app/hktdc-mobile/id333142404?mt=8" target="_blank">iPhone App Store:</a><br>
+- Android手机用户请登入<a href="https://play.google.com/store/apps/details?id=com.hktdc.hktdcmobile&amp;feature=more_from_developer&amp;hl=zh_CN" target="_blank">Google Play</a ><br>
+
+<br>
+<b>手机资讯站</b><br>
+透过<b>香港贸发局手机资讯站</b>—hktdc.com/wap，您可随时随地浏览30个展览资讯，并索取免费入场证*。 <br>
+
+<br>
+<span style="font-style: italic;">* 主办单位将会复核登记人士的业内身份，并保留发入场证的决定权。 </span><br>
+{% endif %}
+</div>
+</div>

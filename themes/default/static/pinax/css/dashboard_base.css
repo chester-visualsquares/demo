@@ -1,0 +1,14 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+body #wrap {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.statement {
+  padding-top: 40px;
+  padding-bottom: 7px;
+  font-size: 14px;
+}

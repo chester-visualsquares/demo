@@ -1,0 +1,258 @@
+{% extends 'signup_mobile_templates/thanks.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKELFAE17_FB_APP_ID }}{% endblock %}
+
+{% block fb_tracking %}
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '341673639320078', {em: '{{ cid }},'});
+  fbq('track', "PageView");
+  fbq('track', 'Lead');</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=341673639320078&ev=PageView&noscript=1"
+/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=341673639320078&ev=Lead&noscript=1"
+/></noscript>
+{% endblock fb_tracking %}
+
+{% block twitter_tracking %}{% endblock twitter_tracking %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKELFAE17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKELFAE17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKELFAE17_OG_URL }}{% endblock %}
+
+{% block app_css %}
+<style>
+{% if network == 'website' %}
+html {
+    overflow: auto;
+}
+
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+body #wrap{
+  margin: 15px auto;
+
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  width: 810px;
+  position: relative;
+}
+{% endif %}
+
+.canvas-wrap {
+  height: 854px;
+  width: 810px;
+
+  position: relative;
+
+  {% if mgr %}
+  background-image: url('//d2dj4eyr0s9m9l.cloudfront.net/tdc_hkelfae17_thanks_bg_{{ request.language }}_fbm.jpg');
+  {% else %}
+  background-image: url('//d2dj4eyr0s9m9l.cloudfront.net/tdc_hkelfae17_thanks_bg_{{ request.language }}_v2.jpg');
+  {% endif %}
+}
+#email-reminder-container {
+  width: 594px;
+
+  position: absolute;
+  left: 88px;
+  top: 254px;
+
+  font-size: 24px;
+  color: #565658;
+  text-align: center;
+}
+#register-more-button {
+  background-color: transparent;
+
+  border: 0px;
+
+  position: absolute;
+  {% if mgr %}
+  background-size: 286px 72px;
+  height: 36px;
+  width: 286px;
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_register_more_small_{{ request.language }}.png');
+  left: 242px;
+  top: 554px;
+  {% else %}
+  background-size: 411px 106px;
+  height: 53px;
+  width: 411px;
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_register_more_{{ request.language }}.png');
+  left: 180px;
+  top: 485px;
+  {% endif %}
+}
+#register-more-button:hover {
+  {% if mgr %}
+  background-position: 0px -36px;
+  {% else %}
+  background-position: 0px -53px;
+  {% endif %}
+}
+.fb-send-to-messenger {
+  position: absolute;
+  top: 443px;
+  left: 299px;
+}
+
+#share-wall {
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_fb_share.png');
+
+  height: 20px;
+  width: 56px;
+  background-size: 56px 20px;
+
+  {% if mgr %}
+  top: 647px;
+  left: 431px;
+  {% else %}
+  top: 407px;
+  left: 353px;
+  {% endif %}
+}
+
+#like-button {
+  left: 196px;
+  top: 640px;
+}
+#canvas-wrap-eng #like-button {
+  left: 343px;
+  top: 615px;
+}
+#linkedin-follow-button {
+  position: absolute;
+  left: 506px;
+  top: 640px;
+}
+#twitter-follow-button {
+  position: absolute;
+  left: 337px;
+  top: 640px;
+}
+
+#footer-title {
+  position: absolute;
+  bottom: 67px;
+  left: 49px;
+}
+#footer-link-1 {
+  position: absolute;
+  bottom: 54px;
+  left: 49px;
+}
+#footer-link-2 {
+  position: absolute;
+  bottom: 40px;
+  left: 49px;
+}
+#footer-link-3 {
+  position: absolute;
+  bottom: 27px;
+  left: 49px;
+}
+#footer-link-4 {
+  position: absolute;
+  bottom: 14px;
+  left: 49px;
+}
+#footer-link {
+  position: absolute;
+  bottom: 88px;
+  left: 49px;
+}
+.footer-text, .footer-text:visited {
+  color: #ff7d00;
+  font-size: 15px;
+  font-style: italic;
+}
+#wc-button {
+  height: 62px;
+  width: 810px;
+  display: block;
+
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_wc_bg.jpg');
+  background-color: transparent;
+}
+</style>
+{% endblock app_css %}
+
+{% block extra_head_js_uncompressed %}
+{{ block.super }}
+<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+{% endblock extra_head_js_uncompressed %}
+
+{% block canvas_extra %}
+<div id="email-reminder-container">
+  {{ cid }}
+</div>
+
+{% if network == 'website' or network == 'twitter' %}
+<a href="{% url 'snm_tdc_hkelfae17_signup_website' %}">
+{% else %}
+<a href="{% url 'snm_tdc_hkelfae17_signup' %}">
+{% endif %}
+<button id="register-more-button" data-event-category="Register"  data-event-action="register-next-buyer"></button>
+</a>
+
+<a id="wc-button" href="https://www.wavecommerce.hk/" target="_blank"></a>
+{% if request.language == 'chi' %}
+<a id="footer-link" class="footer-text" href="http://www.hktdc.com/tc/" target="_blank">www.hktdc.com</a>
+{% else %}
+<a id="footer-link" class="footer-text" href="http://www.hktdc.com/en-buyer/" target="_blank">www.hktdc.com</a>
+{% endif %}
+{% endblock canvas_extra %}
+
+{% block social_buttons %}
+<button id="share-wall" class="share-button" data-event-category="Share"  data-event-action="share-fb-wall"></button>
+
+{% if mgr %}
+<div class="fb-send-to-messenger"
+  messenger_app_id="{{ settings.SNM_TDC_HKELFAE17_MESSENGER_APP_ID }}"
+  page_id="{{ settings.SNM_TDC_HKELFAE17_FB_PAGE_ID }}"
+  data-ref="{{ pass_through_param }}"
+  color="blue"
+  size="xlarge">
+</div>
+{% else %}
+<div id="like-button">
+  <div class="fb-like" data-href="{{ settings.SNM_TDC_HKELFAE17_FB_PAGE_URL }}" data-layout="button" data-action="like" data-show-faces="false" data-share="false">
+  </div>
+</div>
+
+<div id="linkedin-follow-button">
+  <script type="IN/FollowCompany" data-id="15244"></script>
+</div>
+
+<div id="twitter-follow-button">
+  <a href="https://twitter.com/hktdc" class="twitter-follow-button" data-show-count="false">Follow @hktdc</a>
+</div>
+{% endif %}
+{% endblock social_buttons %}
+
+{# The following blocks cannot contain new line characters #}
+{% block canvas_class %}canvas-wrap-{{ request.language }} canvas-wrap{% endblock %}
+{% block canvas_size %}855{% endblock %}
+{% block fb_page_url %}{{ settings.SNM_TDC_HKELFAE17_FB_PAGE_URL }}{% endblock %}
+{% block feed_link %}https://a.wya.me/hktdc/{{ settings.SNM_TDC_HKELFAE17_CLIENT_APP_NAME }}/info-website?fbcsid={{ settings.SNM_TDC_HKELFAE17_FBCSID_PREFIX }}9999&lang={{ request.language }}{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'dashboard_base.html' %}
+
+{% load dashboard_extras %}
+
+
+{% block head_title_base %}Convert Simply Dashboard{% endblock %}
+
+
+{% block extra_head_css %}
+<style>
+div {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+</style>
+{% endblock extra_head_css %}
+
+
+{% block main_outer %}
+<div>
+  <h1>{{ project.name }} {{ network|title }} Sign Up List</h1>
+  <a href="{% url 'dashboard_logout' %}">Logout</a>
+</div>
+
+<div>
+  <a href="{% url 'dashboard_download_signup_list' project_id=project.pk network=network %}">Download Report</a><br>
+  <a href="{% url 'dashboard_projects' %}">Back to Campaign List</a>
+</div>
+
+<div>
+  This list contains {{ signup_report|length }} {{ network|title }} signup{{ signup_report|length|pluralize }}.
+</div>
+
+{% if signup_breakdown %}
+<div>
+  {% for category, count in signup_breakdown.iteritems %}
+  <b>{{ category }}: {{ count }}</b><br>
+  {% endfor %}
+</div>
+{% endif %}
+
+<table id="signup-list" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      {% for report_field in report_fields %}
+      <th>{{ report_field }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+
+  <tfoot>
+    <tr>
+      {% for report_field in report_fields %}
+      <th>{{ report_field }}</th>
+      {% endfor %}
+    </tr>
+  </tfoot>
+
+  <tbody>
+    {% for signup in signup_report %}
+    <tr>
+      {% for report_field in report_fields %}
+      <td class="dt-center">{{ signup|get_item:report_field|humanize_boolean|humanize_list }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock main_outer %}
+
+
+{% block extra_body %}
+<script>
+  $(document).ready(function() {
+    $('#signup-list').dataTable({
+      'searching': false,
+      'paging': false,
+      'order': []
+    });
+  });
+</script>
+{% endblock extra_body %}

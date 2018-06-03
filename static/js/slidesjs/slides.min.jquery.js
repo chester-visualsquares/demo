@@ -1,0 +1,1 @@
+../../../../3rdparty/slidesjs/latest/source/slides.min.jquery.js

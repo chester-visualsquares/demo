@@ -1,0 +1,26 @@
+[
+    {
+        "locale":"default",
+        "composer_input_disabled":true,
+        "call_to_actions":[
+            {
+                "type":"web_url",
+                "title":"Contact HKTDC",
+                "url":"https://goo.gl/VkuIZ2",
+                "webview_height_ratio":"full",
+            }
+        ]
+    },
+    {
+        "locale":"zh_CN",
+        "composer_input_disabled":false,
+        "call_to_actions":[
+            {
+                "type":"web_url",
+                "title":"聯絡香港貿發局",
+                "url":"http://aboutus.hktdc.com/tc/#contact-us",
+                "webview_height_ratio":"full",
+            }
+        ]
+    }
+]

@@ -1,0 +1,427 @@
+{% extends 'signup_mobile_templates/signup_mobile.html' %}
+{% load common_extras %}
+
+{% block fb_app_id %}{{ settings.SNM_TDC_HKJF17_FB_APP_ID }}{% endblock %}
+
+{% block fb_retargeting %}
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '341673639320078');
+  fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=341673639320078&ev=PageView&noscript=1"
+/></noscript>
+{% endblock fb_retargeting %}
+
+{% block twitter_tracking %}{% endblock twitter_tracking %}
+
+{% block head_title_base %}{% language_option settings.SNM_TDC_HKJF17_FEED_LINK_NAME %}{% endblock %}
+{% block og_title %}{% language_option settings.SNM_TDC_HKJF17_FEED_LINK_NAME %}{% endblock %}
+{% block og_description %}{% language_option settings.SNM_TDC_HKJF17_FEED_DESCRIPTION %}{% endblock %}
+{% block og_image %}{{ settings.SNM_TDC_HKJF17_FEED_PICTURE }}{% endblock %}
+{% block og_url %}{{ settings.SNM_TDC_HKJF17_OG_URL }}{% endblock %}
+
+{% block app_css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}jquery-intl-tel-input/css/intlTelInput.css">
+
+<style>
+html {
+  overflow: auto;
+}
+body {
+  background: url('//d2dj4eyr0s9m9l.cloudfront.net/linkedin_bg.jpg') repeat;
+}
+body #wrap {
+  margin: 0px auto;
+  width: 320px;
+}
+.error {
+  color: #fa7ef0;
+}
+input[type=checkbox] {
+  -webkit-transform: scale(0.7, 0.7);
+}
+
+#canvas-wrap {
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+
+  height: 599px;
+  width: 320px;
+  background-size: 320px 555px;
+  position: relative;
+
+  background-image: url('//d2dj4eyr0s9m9l.cloudfront.net/tdc_hkjf17_signup_mobile_bg_top_{{ request.language }}.jpg');
+}
+
+#canvas-wrap #language-switch {
+  position: absolute;
+  right: 12px;
+  top: 9px;
+
+  font-size: 8px;
+}
+#canvas-wrap #language-switch, #language-switch:visited {
+  color: #9f9f9f;
+}
+
+#attend-container {
+  position: absolute;
+  width: 555px;
+  color: #fff;
+  font-size: 11px;
+}
+.signup-chi #attend-container {
+  top: 109px;
+  left: 34px;
+}
+.signup-eng #attend-container {
+  top: 93px;
+  left: 32px;
+  font-size: 8px;
+  line-height: 9px;
+}
+.signup-chi #attend-container div {
+  float: left;
+  margin-right: 7px;
+}
+.signup-chi #attend-container #attend-error {
+  position: absolute;
+  top: 14px;
+  left: 204px;
+}
+.signup-eng #attend-container #attend-error {
+  position: absolute;
+  top: -2px;
+  left: 158px;
+}
+
+#canvas-wrap #contact .text-input input {
+  background-color: transparent;
+  border: 0px;
+  outline: 0px;
+
+  height: 20px;
+  line-height: 20px;
+  width: 188px;
+  font-size: 13px;
+}
+.signup-eng#canvas-wrap #contact .text-input input {
+  width: 197px;
+}
+
+#canvas-wrap #id_first_name {
+  position: absolute;
+  left: 213px;
+  top: 145px;
+}
+.signup-eng#canvas-wrap #id_first_name {
+  width: 120px;
+  left: 85px;
+  top: 135px;
+}
+#canvas-wrap #first-name-container input#id_first_name{
+  width: 70px;
+}
+#canvas-wrap #id_last_name {
+  position: absolute;
+  width: 120px;
+  left: 94px;
+  top: 145px;
+}
+.signup-eng#canvas-wrap #id_last_name {
+  width: 120px;
+  left: 211px;
+  top: 135px;
+}
+#canvas-wrap #last-name-container input#id_last_name{
+  width: 70px;
+}
+#canvas-wrap #id_company {
+  position: absolute;
+  left: 93px;
+  top: 188px;
+}
+.signup-eng#canvas-wrap #id_company {
+  left: 84px;
+  top: 177px;
+}
+#canvas-wrap #id_email {
+  position: absolute;
+  left: 93px;
+  top: 230px;
+}
+.signup-eng#canvas-wrap #id_email {
+  left: 84px;
+  top: 219px;
+}
+#canvas-wrap #mobile-phone-container {
+  position: absolute;
+  left: 92px;
+  top: 273px;
+}
+.signup-eng#canvas-wrap #mobile-phone-container {
+  left: 84px;
+  top: 262px;
+}
+#canvas-wrap #mobile-phone-container input#id_phone {
+  position: relative;
+  height: 28px;
+}
+
+#form-detail-container {
+  width: 245px;
+
+  position: absolute;
+  top: 302px;
+  left: 37px;
+
+  font-size: 8px;
+  line-height: 10px;
+  color: #c5e0f5;
+}
+.signup-eng #form-detail-container {
+  top: 297px;
+  font-size: 6px;
+  line-height: 7px;
+}
+#form-detail-container > div {
+  margin-bottom: 7px;
+}
+.signup-eng #form-detail-container > div {
+  margin-bottom: 8px;
+}
+#form-detail-container #format {
+  font-size: 9px;
+  line-height: 10px;
+}
+.signup-eng #form-detail-container #format {
+  font-size: 8px;
+  line-height: 10px;
+}
+#form-detail-container #privacy-policy a,
+#form-detail-container #privacy-policy a:visited {
+  color: #adadad;
+}
+#form-detail-container #unsubscribe {
+  font-size: 8px;
+  line-height: 10px;
+}
+.signup-eng #form-detail-container #unsubscribe {
+  font-size: 7px;
+  line-height: 9px;
+}
+#canvas-wrap #button-submit {
+  position: absolute;
+  left: 0px;
+  top: 438px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/mobile_button_register_{{ request.language }}.png');
+  background-size: 320px 70px;
+  background-color: transparent;
+
+  height: 70px;
+  width: 320px;
+  border: 0px;
+}
+.signup-eng#canvas-wrap #button-submit {
+  top: 444px;
+}
+
+#canvas-wrap #footer-link {
+  position: absolute;
+  bottom: 58px;
+  left: 22px;
+
+  font-size: 9px;
+  font-style: italic;
+}
+#canvas-wrap #footer-link, #footer-link:visited {
+  color: #ff7d00;
+}
+#cs-button {
+  height: 44px;
+  width: 320px;
+  display: block;
+
+  position: absolute;
+  top: 555px;
+  left: 0px;
+
+  background-image: url('{{ STATIC_URL }}img/tdc_buttons/button_cs_mob.jpg');
+  background-size: 320px 44px;
+  background-color: transparent;
+}
+</style>
+{% endblock app_css %}
+
+{% block canvas_size %}1214{% endblock %}
+{% block app_canvas %}
+<div id="canvas-wrap" class="signup-{{ request.language }}">
+  <a name="contact-form"></a>
+
+  {% if request.language == 'chi' %}
+  <a id="language-switch" href="{% language_url 'eng' %}">English</a>
+  {% else %}
+  <a id="language-switch" href="{% language_url 'chi' %}">中文</a>
+  {% endif %}
+
+  <form id="contact" method="post" action="">
+    {% csrf_token %}
+    {{ form.country }}
+    {{ form.country_code }}
+    {{ form.fb_psid }}
+
+    <div id="attend-container">
+      <div>
+        {{ form.attend_jfs }}
+        <label for="id_attend_jfs">
+          {% if request.language == 'chi' %}
+          {{ settings.SNM_TDC_HKJF17_FAIR_NAME_CHI_JFS }}
+          {% else %}
+          {{ settings.SNM_TDC_HKJF17_FAIR_NAME_ENG_JFS }} 
+          {% endif %}
+        </label>
+      </div>
+
+      <div>
+        {{ form.attend_idg }}
+        <label for="id_attend_idg">
+          {% if request.language == 'chi' %}
+          {{ settings.SNM_TDC_HKJF17_FAIR_NAME_CHI_IDG }}
+          {% else %}
+          {{ settings.SNM_TDC_HKJF17_FAIR_NAME_ENG_IDG }}
+          {% endif %}
+        </label>
+    </div>
+
+    {% if form.errors.attend_idg %}
+    <div class="error" id="attend-error">
+      *{{ form.errors.attend_idg|first|default:'' }}
+    </div>
+    {% endif %}
+    </div>
+
+    {% if request.language == 'chi' %}
+    <div class="text-input" id="last-name-container">
+      {{ form.last_name }}
+    </div>
+    {% endif %}
+    <div class="text-input" id="first-name-container">
+      {{ form.first_name }}
+    </div>
+    {% if request.language == 'eng' %}
+    <div class="text-input" id="last-name-container">
+      {{ form.last_name }}
+    </div>
+    {% endif %}
+    <div class="text-input" id="company-container">
+      {{ form.company }}
+    </div>
+    <div class="text-input" id="email-container">
+      {{ form.email }}
+    </div>
+    <div class="text-input" id="mobile-phone-container">
+      {{ form.mobile_phone }}
+    </div>
+
+    <meta name="format-detection" content="telephone=no">
+    {% if request.language == 'chi' %}
+    <div id="form-detail-container">
+      <div id="format">
+        請選擇國家號碼，然後輸入電話號碼（如適用，請包括地區號碼），例：+1 5417543010
+      </div>
+      <div id="reminder">
+        只供十八歲或以上的業內人士參觀。主辦單位將會復核登記人士的業內身份，並保留發入場證的決定權。
+      </div>
+      <div id="privacy-policy">
+        本人同意主辦機構可將上述資料編入其全部或任何資料庫內以用於直接促銷或商貿配對﹝因而可能成為可供本地及/或海外公眾人士使用﹞，以及用於<a href="http://www.hktdc.com/mis/pps/tc/Privacy-Policy-Statement.html" target="_blank">私隱政策聲明</a>中所述之其他用途。本人確認主辦機構已獲得本人同意，將本人之個人資料提供作上述之用途。<br>
+        <br>
+        (若閣下不欲收取香港貿易發展局的任何宣傳資料，請聯絡本局客戶服務熱線 (852) 1830668或 <a href="mailto:hktdc@hktdc.org" target="_blank">hktdc@hktdc.org</a>。)
+      </div>
+    </div>
+    {% else %}
+    <div id="form-detail-container">
+      <div id="format">
+        Please select the country code and enter the phone number (if applicable, please include the area code) e.g.: +1 5417543010
+      </div>
+      <div id="reminder">
+        For trade visitors aged 18 or above only. The organisers shall verify the trade identity of registrants and reserve the right to refuse admission of any registrants who are deemed inappropriate.  
+      </div>
+      <div id="privacy-policy">
+        I agree that the above information may be used by the Organisers for incorporation in all or any of their database for direct marketing or business matching purpose (and may therefore become available to the public within and/or outside of Hong Kong for use by them), and for any other purposes as stated in the <a href="http://www.hktdc.com/mis/pps/en/Privacy-Policy-Statement.html" target="_blank">Privacy Policy Statement</a>. I confirm that the Organisers have my consent to release my personal data for the purposes stated herein.<br>
+        <br>
+       (If you do not wish to receive any promotional materials from the HKTDC, please contact our Customer Service Hotline at (852) 1830668 or <a href="mailto:hktdc@hktdc.org" target="_blank">hktdc@hktdc.org</a>.)
+      </div>
+    </div>
+    {% endif %}
+
+    <div id="submit-container">
+      <button id="button-submit" type="submit"></button>
+    </div>
+  </form>
+
+  <a id="cs-button" href="http://www.convertsimply.com" target="_blank"></a>
+  {% if request.language == 'chi' %}
+  <a id="footer-link" href="http://www.hktdc.com/tc/" target="_blank">www.hktdc.com</a>
+  {% else %}
+  <a id="footer-link" href="http://www.hktdc.com/en-buyer" target="_blank">www.hktdc.com</a>
+  {% endif %}
+</div>
+{% endblock app_canvas %}
+
+{% block extra_body %}
+<script>{% include 'signup_mobile_tdc_hkjf17/signup.js' %}</script>
+
+<script src="{{ STATIC_URL }}jquery-intl-tel-input/js/intlTelInput.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#id_mobile_phone").intlTelInput({
+    autoPlaceholder: false,
+    initialCountry: "hk",
+    nationalMode: true,
+    preferredCountries: ['us', 'ca', 'ru', 'fr', 'it', 'gb', 'de', 'br', 'my',
+                         'au', 'id', 'ph', 'sg', 'th', 'jp', 'kr', 'cn', 'tr',
+                         'in', 'hk', 'tw'],
+    responsiveDropdown: true,
+    separateDialCode: true,
+    utilsScript: "{{ STATIC_URL }}jquery-intl-tel-input/js/utils.js"
+  });
+
+  window.extAsyncInit = function() {
+    MessengerExtensions.getUserID(function success(uids) {
+      var psid = uids.psid;
+      $('#id_fb_psid').val(psid);
+    }, function error(err, errorMessage) {
+
+    }); 
+  };
+
+  $('#contact').submit(function() {
+    var countryData = $('#id_mobile_phone').intlTelInput("getSelectedCountryData");
+    $('#id_country').val(countryData.iso2);
+    $('#id_country_code').val(countryData.dialCode);
+    MessengerExtensions.requestCloseBrowser(function success() {
+      return;
+    }, function error(err) {
+    });
+  });
+});
+</script>
+
+<script>
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'Messenger'));
+</script>
+{% endblock extra_body %}

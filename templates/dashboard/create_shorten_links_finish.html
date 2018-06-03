@@ -1,0 +1,58 @@
+{% extends 'dashboard_base.html' %}
+
+{% block head_title_base %}Convert Simply Shorten Link Creation{% endblock %}
+
+{% block extra_head_css %}
+<style>
+div {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+#project, #platform, #name, #short-url-container {
+  font-size: 20px;
+}
+#short-url {
+  display: inline-block;
+}
+</style>
+{% endblock extra_head_css %}
+
+{% block main_outer %}
+<h1>Done!</h1>
+<div id="project">
+  Project: {{ channel.project }}
+</div>
+<div id="name">
+  Name: {{ channel.name }}
+</div>
+<div id="platform">
+  Selected platform: {{ channel.get_network_display }} 
+  {% if channel.network == 'FB' %}
+  &amp; {{ channel.get_language_display }}
+  {% endif %}
+</div>
+<div id="short-url-container">
+  Shorten link: 
+  <u><a id="short-url" href="{{ channel.short_url }}">{{ channel.short_url }}</a></u>
+  <button onclick="copyToClipboard('#short-url')">Click to copy</button>
+  <span id="copy-message"></span>
+</div>
+<div>
+  <a href="{% url 'dashboard_create_shorten_links' %}">Generate More</a><br>
+  <a href="{% url 'dashboard_projects' %}">Go to Campaign List</a>
+</div>
+
+{% endblock main_outer %}
+
+{% block extra_body %}
+<script>
+  function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+    $("#copy-message").text("Copied!");
+  }
+</script>
+{% endblock extra_body %}

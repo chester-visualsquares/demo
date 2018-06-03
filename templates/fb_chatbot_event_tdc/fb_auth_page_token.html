@@ -1,0 +1,96 @@
+{% extends 'inspinia_base.html' %}
+
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block head_title_base %}Convert Simply BOT Authentication{% endblock %}
+{% block extra_head_css %}
+<style>
+#next-button {
+  padding-top: 32px;
+}
+</style>
+{% endblock extra_head_css %}
+
+
+{% block sidebar_header %}
+  <div class="dropdown profile-element">
+    <span><img alt="image" class="img-circle" height="48px" width="48px" src="{{ STATIC_URL }}img/fb_chatbot_event_tdc/hktdc_logo.png" /></span>
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+      <span class="clear">
+        <span class="block m-t-xs">
+          <strong class="font-bold">HKTDC</strong>
+        </span>
+        <span class="text-muted text-xs block">Client <b class="caret"></b></span>
+      </span>
+    </a>
+    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+      <li class="divider"></li>
+      <li><a href="{% url 'fb_chatbot_event_tdc_auth_logout' %}">Logout</a></li>
+    </ul>
+  </div>
+  <div class="logo-element">
+    <span><img alt="image" class="img-circle" height="48px" width="48px" src="{{ STATIC_URL }}img/fb_chatbot_event_tdc/hktdc_logo.png" /></span>
+  </div>
+{% endblock sidebar_header %}
+
+
+{% block logout_url_1 %}{% url 'fb_chatbot_event_tdc_auth_logout' %}{% endblock logout_url_1 %}
+{% block logout_url_2 %}{% url 'fb_chatbot_event_tdc_auth_logout' %}{% endblock logout_url_2 %}
+{% block welcome_message %}Powered by Convert Simply.{% endblock welcome_message %}
+
+{% block sidebar_items %}
+<li class="active">
+  <a href="{% url 'fb_chatbot_event_tdc_fb_auth' %}">
+    <i class="fa fa-envelope"></i>
+    <span class="nav-label">BOT Authentication</span>
+  </a>
+</li>
+{% endblock sidebar_items %}
+
+
+{% block page_title %}Convert Simply BOT{% endblock page_title %}
+
+
+{% block page_items %}
+<li>Authentication</a></li>
+<li><a href="{% url 'fb_chatbot_event_tdc_fb_auth' %}">Log in Facebook</a></li>
+<li class="active"><strong>Choose Facebook Page</strong></li>
+{% endblock page_items %}
+
+
+{% block body_block %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Choose the Page to install Convert Simply BOT</h5>
+      </div>
+      <div class="ibox-content">
+        <form class="form-horizontal" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Facebook page<br/>
+              <small class="text-navy">Available for installation</small>
+            </label>
+            <div class="col-sm-10">
+              {{ error_message }}
+              {% for page in page_list %}
+              <div><label> <input type="radio" value="{{ page.id }}" name="page_id">{{ page.name }}</label></div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="form-group" >
+            <div class="col-sm-4 col-sm-offset-2">
+              <button class="btn btn-primary" id="submit-page-button" type="submit" name="submitpage">Confirm</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body_block %}
+
+
+{% block extra_body_js %}{% endblock extra_body_js %}
